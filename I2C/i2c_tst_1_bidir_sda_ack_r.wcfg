@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/Camilo/Documents/Xilinx_Workspace/I2C/i2c_tst_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="i2c_tst" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="19" />
+   <wvobject fp_name="/i2c_tst/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/rst_n" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst_n</obj_property>
+      <obj_property name="ObjectShortName">rst_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/rw" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rw</obj_property>
+      <obj_property name="ObjectShortName">rw</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/burst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">burst</obj_property>
+      <obj_property name="ObjectShortName">burst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addr[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[6:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/reg_addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">reg_addr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_addr[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data[15:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/shift_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">shift_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_data[15:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/busy" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">busy</obj_property>
+      <obj_property name="ObjectShortName">busy</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/err" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">err</obj_property>
+      <obj_property name="ObjectShortName">err</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state[4:0]</obj_property>
+      <obj_property name="ObjectShortName">state[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/rrww" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rrww</obj_property>
+      <obj_property name="ObjectShortName">rrww</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/sda" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sda</obj_property>
+      <obj_property name="ObjectShortName">sda</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/scl" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">scl</obj_property>
+      <obj_property name="ObjectShortName">scl</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/cGen_half" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">cGen_half</obj_property>
+      <obj_property name="ObjectShortName">cGen_half</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/pointing" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">pointing</obj_property>
+      <obj_property name="ObjectShortName">pointing</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/state_pointer1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state_pointer1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">state_pointer1[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_tst/uut/state_pointer2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state_pointer2[4:0]</obj_property>
+      <obj_property name="ObjectShortName">state_pointer2[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>
