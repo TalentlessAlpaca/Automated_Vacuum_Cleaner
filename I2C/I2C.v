@@ -32,9 +32,15 @@ module I2C(
 	 output reg [15:0] data_o,
 	 // I2C Specifics
 	 inout sda,
+<<<<<<< HEAD
 	 output reg scl,
 	 // For Simulation
 	 output [5:0] state_o
+=======
+	 output scl,
+	 // For Simulation
+	 output [4:0] state_o
+>>>>>>> master
     );
 	 // Show state
 	 assign state_o = state;
@@ -57,6 +63,10 @@ module I2C(
 	 reg cGen_fSt;
 	 reg [15:0] cGen_lim;
 	 clk_generator cGen(.clk(clk),.rst_n(cGen_rst_n),.en(cGen_en),.f_state(cGen_fSt),.half_t(cGen_half),.limit(cGen_lim),.clk_out(clk_out));
+<<<<<<< HEAD
+=======
+	 assign scl = clk_out;
+>>>>>>> master
 	 // Shift Registers
 	 reg [15:0] shift_data;
 	 reg [15:0] shifted_data;
@@ -64,6 +74,7 @@ module I2C(
 	 reg [3:0] shifts_dummy;
 	 
 	 // Conditions States
+<<<<<<< HEAD
 	 localparam start 		 = 6'd0,
 	 				stop  		 = 6'd1,
 					stop_s		 = 6'd2,
@@ -117,6 +128,51 @@ module I2C(
 	 reg [5:0] next_state;
 	 reg [5:0] state_pointer1;
 	 reg [5:0] state_pointer2;
+=======
+	 localparam start 		 = 0,
+	 				stop  		 = 1,
+					stop_s		 = 30,
+					stop_w		 = 31,
+	 				ack_r_wait 	 = 2,
+					ack_r_read 	 = 3,
+					ack_w_wait 	 = 4,
+					ack_w_write  = 5,
+	 				nack_w_wait  = 6,
+					nack_w_write = 7;
+	 // Shift Setup
+	 localparam shift_Addr_RW 		= 8,
+					shift_1byte_W 		= 9,
+					shift_1byte_W_D 	= 10,
+					shift_2byte_W 		= 11,
+					shift_1byte_R 		= 12,
+					shift_2byte_R 		= 13,
+					shift_wait			= 14;
+	 // Write States
+	 localparam shift_hByte = 15,
+	 				shift_lByte = 16;
+	 // Read States
+	 localparam read_hByte = 17,
+	 				read_lByte = 18;
+	 // Shift Process
+	 localparam shift_w 	= 19, // Send bit
+					wait_w	= 20,	// Increment shifts
+					comp_w	= 21,
+					shift_r	= 22,
+					wait_r	= 23,
+					comp_r	= 24;
+	 // Other States
+	 localparam reset	 = 25,
+					idle 	 = 26,
+					init 	 = 27,
+					init2  = 28,
+					err_st = 29;
+					
+	 // State Rgisters
+	 reg [4:0] state;
+	 reg [4:0] next_state;
+	 reg [4:0] state_pointer1;
+	 reg [4:0] state_pointer2;
+>>>>>>> master
 	 reg pointing;
 	 // Finite State Machines
 	 always@(posedge clk) begin
@@ -131,6 +187,7 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
 				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1'b0;
 				cGen_fSt 	<= 1'b1;
@@ -142,6 +199,19 @@ module I2C(
 				
 				shift_data 		<= 16'h0;
 				shifted_data	<= 16'h0;
+=======
+				rrww 			<= 1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 0;
+				cGen_fSt 	<= 1;
+				cGen_lim 	<= 0;
+				// Outputs
+				busy			<= 1;
+				err			<= 1;
+				data_o		<=  8'h0;
+				
+				shift_data 		<= 0;
+				shifted_data	<= 0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -158,14 +228,24 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
 				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1'b0;
 				cGen_fSt 	<= 1'b1;
+=======
+				rrww 			<= 1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 0;
+				cGen_fSt 	<= 1;
+>>>>>>> master
 				cGen_lim 	<= 16'd1000; // SCL frequency of 50kHz
 				// Outputs
 				busy			<= 0;
 				err			<= 0;
+<<<<<<< HEAD
 				data_o		<=  data_o;
+=======
+				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -183,6 +263,7 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
 				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1'b1;
 				cGen_fSt 	<= 1'b1;
@@ -191,6 +272,16 @@ module I2C(
 				busy			<= 1'b0;
 				err			<= 1'b0;
 				data_o		<= 16'h0;
+=======
+				rrww 			<= 1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1;
+				cGen_fSt 	<= 1;
+				cGen_lim 	<= 16'd1000; // SCL frequency of 50kHz
+				// Outputs
+				busy			<= 0;
+				err			<= 0;
+				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -208,6 +299,7 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
 				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1'b1;
 				cGen_fSt 	<= 1'b1;
@@ -216,6 +308,16 @@ module I2C(
 				busy			<= 1'b1;
 				err			<= 1'b0;
 				data_o		<= 16'h0;
+=======
+				rrww 			<= 1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1;
+				cGen_fSt 	<= 1;
+				cGen_lim 	<= 16'd1000; // SCL frequency of 50kHz
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -233,6 +335,7 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
 				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1'b0;
 				cGen_fSt 	<= 1'b1;
@@ -241,6 +344,16 @@ module I2C(
 				busy			<= 1'b0;
 				err			<= 1'b1;
 				data_o		<= 16'h0;
+=======
+				rrww 			<= 1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 0;
+				cGen_fSt 	<= 1;
+				cGen_lim 	<= 0;
+				// Outputs
+				busy			<= 0;
+				err			<= 1;
+				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -253,12 +366,17 @@ module I2C(
 				*/
 				next_state <= err_st;
 			 end
+<<<<<<< HEAD
 			 /////////////////////////////////////////// Protocol ///////////////////////////////////////////////////
+=======
+			 /////// Protocol ///////
+>>>>>>> master
 			 	// Write Byte
 			 shift_1byte_W: begin
 				// Regs
 				a 							<= 1'b0;
 				b 							<= sda;
+<<<<<<< HEAD
 				rrww 						<= 1'b1;
 				cGen_rst_n				<= 1'b1;
 				cGen_fSt 				<= 1'b1;
@@ -328,6 +446,8 @@ module I2C(
 				// Regs
 				a 							<= 1'b0;
 				b 							<= sda;
+=======
+>>>>>>> master
 				rrww 						<= 1;
 				cGen_rst_n				<= 1;
 				cGen_fSt 				<= 1;
@@ -342,7 +462,11 @@ module I2C(
 				data_o		<= 8'h0;
 				// Pointers
 				
+<<<<<<< HEAD
 				state_pointer1 <= shift_2byte_W_D;
+=======
+				state_pointer1 <= shift_1byte_W_D;
+>>>>>>> master
 				state_pointer2 <= ack_r_wait;
 				pointing			<= 1;
 				/* wires/inputs
@@ -356,9 +480,15 @@ module I2C(
 				/	  data
 				*/
 				if(cGen_half) next_state <= shift_w;
+<<<<<<< HEAD
 				else next_state <= shift_2byte_W;
 			 end
 			 shift_2byte_W_D: begin
+=======
+				else next_state <= shift_1byte_W;
+			 end
+			 shift_1byte_W_D: begin
+>>>>>>> master
 				// Regs
 				a 							<= 1'b0;
 				b 							<= sda;
@@ -375,6 +505,7 @@ module I2C(
 				err			<= 0;
 				data_o		<= 8'h0;
 				// Pointers
+<<<<<<< HEAD
 				state_pointer1 <= shift_2byte_W_D2;
 				state_pointer2 <= ack_r_wait;
 				pointing			<= 1;
@@ -408,6 +539,9 @@ module I2C(
 				err			<= 0;
 				data_o		<= 8'h0;
 				// Pointers
+=======
+				
+>>>>>>> master
 				state_pointer1 <= stop;
 				state_pointer2 <= ack_r_wait;
 				pointing			<= 1;
@@ -421,6 +555,7 @@ module I2C(
 				/	  reg_addr
 				/	  data
 				*/
+<<<<<<< HEAD
 				if(cGen_half) next_state <= shift_w;
 				else next_state <= shift_2byte_W_D2;
 			 end
@@ -686,6 +821,22 @@ module I2C(
 				else next_state <= shift_2byte_R_D2;
 			 end
 			 
+=======
+				if(cGen_half)next_state <= shift_w;
+			 end
+			 	// Write 2 Bytes
+			 shift_2byte_W: begin
+			 
+			 end
+			 	// Read Byte
+			 shift_1byte_R: begin
+			 
+			 end
+			 	// Read 2 Bytes
+			 shift_2byte_R: begin
+			 
+			 end
+>>>>>>> master
 			 shift_wait: begin
 				pointing <= 0;
 				if(!clk_out) next_state <= state_pointer1;
@@ -700,7 +851,11 @@ module I2C(
 				cGen_fSt 				<= 1;
 				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
 				shift_data [15:9]		<= addr;
+<<<<<<< HEAD
 				shift_data [8]			<= 0;
+=======
+				shift_data [8]			<= rw;
+>>>>>>> master
 				shifted_data		 	<= 16'h0;
 				shifts					<= 0;
 				shifts_dummy			<= 0;
@@ -734,19 +889,32 @@ module I2C(
 			 end
 			 shift_w: begin
 				// Regs
+<<<<<<< HEAD
 				a 							<= shift_data[15] ? 1'bz : 1'b0;
 				b 							<= sda;
 				rrww 						<= 1'b1;		// If shift_data[15] = 1, writes 'z'; else, writes 0
 				cGen_rst_n				<= 1'b1;
 				cGen_fSt 				<= 1'b1;
+=======
+				a 							<= shift_data[15] ? 1'bz : 0;
+				b 							<= sda;
+				rrww 						<= 1;		// If shift_data[15] = 1, writes 'z'; else, writes 0
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+>>>>>>> master
 				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
 				shift_data				<= shift_data;
 				shifted_data		 	<= shift_data<<1;
 				shifts					<= shifts;
 				shifts_dummy			<= shifts+1;
 				// Outputs
+<<<<<<< HEAD
 				busy			<= 1'b1;
 				err			<= 1'b0;
+=======
+				busy			<= 1;
+				err			<= 0;
+>>>>>>> master
 				data_o		<= 8'h0;
 				// Pointers
 				state_pointer1 <= state_pointer1;
@@ -837,6 +1005,7 @@ module I2C(
 					else				next_state <= state_pointer1;
 				end
 			 end
+<<<<<<< HEAD
 			 
 			 shift_r: begin
 				// Regs
@@ -950,6 +1119,8 @@ module I2C(
 					else				next_state <= state_pointer1;
 				end
 			 end
+=======
+>>>>>>> master
 			 /////// Conditions ///////
 			 start: begin
 				// Regs
@@ -973,6 +1144,7 @@ module I2C(
 				/	  reg_addr
 				/	  data
 				*/
+<<<<<<< HEAD
 				if(!clk_out) begin
 					if(rw) begin
 						if(pointing) next_state <= state_pointer2;
@@ -980,6 +1152,9 @@ module I2C(
 					end
 					else next_state <= shift_Addr_RW;
 				end
+=======
+				if(!clk_out) next_state <= shift_Addr_RW;
+>>>>>>> master
 				else next_state <= start;
 			 end
 			 stop: begin
@@ -1124,6 +1299,7 @@ module I2C(
 				else next_state <= ack_r_read;
 			 end
 			 ack_w_wait: begin
+<<<<<<< HEAD
 				// Regs
 				a 							<= 1'b0;
 				b 							<= sda;
@@ -1182,14 +1358,23 @@ module I2C(
 				data_o <= shift_data;
 				if(!clk_out) next_state <= stop;
 				else next_state <= nack_w_write2;
+=======
+				
+			 end
+			 nack_w_wait: begin
+				
+>>>>>>> master
 			 end
 		endcase
 	end
 	 
+<<<<<<< HEAD
 	 
 	 always@(*) begin
 		if(clk_out) scl <= 1'bz;
 		else			scl <= 1'b0;
 	 end
 	 
+=======
+>>>>>>> master
 endmodule

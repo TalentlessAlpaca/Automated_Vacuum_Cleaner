@@ -31,11 +31,14 @@ module clk_generator(
 	 reg[15:0] count;
 	 initial count = 0;
 	 
+<<<<<<< HEAD
 	 always@(*) begin
 		if(count > (limit>>1)) half_t <= 1;
 		else						  half_t <= 0;
 	 end
 	 
+=======
+>>>>>>> master
 	 always@(posedge clk) begin
 		if(rst_n)begin
 			en <= 1;
@@ -44,10 +47,19 @@ module clk_generator(
 				count <= 16'h0;
 				clk_out <= !clk_out;
 			end
+<<<<<<< HEAD
+=======
+			if(count > (limit>>1)) half_t <= 1;
+			else							half_t <= 0;
+>>>>>>> master
 		end
 		else begin 
 			count <= 0;
 			clk_out <= f_state;
+<<<<<<< HEAD
+=======
+			half_t <= 0;
+>>>>>>> master
 			en <= 0;
 		end
 	 end

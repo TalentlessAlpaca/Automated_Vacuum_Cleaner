@@ -120,7 +120,10 @@ module i2c_tst;
 		sda_io <= 1;
 		
 	end
+<<<<<<< HEAD
 	
+=======
+>>>>>>> master
 	assign sda = (sda_io) ? 1'bz : sda_buffer;
 	always #5 clk = ~clk;
       

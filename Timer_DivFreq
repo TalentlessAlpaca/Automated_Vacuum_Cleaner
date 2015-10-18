@@ -1,0 +1,30 @@
+ module divisor_de_frecuecia(clk,clk_out);
+    input clk;
+    output reg clk_out;
+    reg rst;
+    reg [25:0] counter;
+
+initial
+rst=0;
+
+    always @(posedge clk or negedge rst)
+    begin
+      if(!rst)
+       begin
+       rst<=1;
+       counter<=26'd0;
+       clk_out <= 1'b0;
+       end
+     else
+       if(counter==26'd49_999_999) 
+         begin
+         counter<=26'd0;
+         clk_out <= ~clk_out;
+         end
+      else
+       begin
+       counter<=counter+1;
+       end
+   end
+   
+   endmodule
