@@ -1,0 +1,10 @@
+Command line:
+   i2c_tst_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  52676
+
+Fri Oct 16 08:46:20 2015
+
+
+ Elaboration Time: 0.03125 sec

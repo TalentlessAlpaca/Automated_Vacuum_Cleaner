@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<generated_project xmlns="http://www.xilinx.com/XMLSchema" xmlns:xil_pn="http://www.xilinx.com/XMLSchema">
+
+  <!--                                                          -->
+
+  <!--             For tool use only. Do not edit.              -->
+
+  <!--                                                          -->
+
+  <!-- ProjectNavigator created generated project file.         -->
+
+  <!-- For use in tracking generated file and other information -->
+
+  <!-- allowing preservation of process status.                 -->
+
+  <!--                                                          -->
+
+  <!-- Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved. -->
+
+  <version xmlns="http://www.xilinx.com/XMLSchema">11.1</version>
+
+  <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="I2C.xise"/>
+
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="I2C.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="I2C.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="I2C.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="I2C.ngr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="I2C.prj"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="I2C.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="I2C.syr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="I2C.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="I2C_envsettings.html"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="I2C_summary.html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="I2C_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="clk_gen_tst_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="clk_generator.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="clk_generator.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="clk_generator.xst"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_tst_1read_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_tst_2read_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_tst_2read_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="i2c_tst_2read_isim_beh.wdb"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_tst_2write_isim_beh.exe"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_tst_2write_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_tst_isim_beh.exe"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_tst_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_INI" xil_pn:name="xilinxsim.ini"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1444900030" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1444900030">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445115086" xil_pn:in_ck="8344435638829163307" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1445115086">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="I2C.v"/>
+      <outfile xil_pn:name="clk_gen_tst.v"/>
+      <outfile xil_pn:name="clk_generator.v"/>
+      <outfile xil_pn:name="i2c_tst.v"/>
+      <outfile xil_pn:name="i2c_tst_1write.v"/>
+      <outfile xil_pn:name="i2c_tst_2read.v"/>
+      <outfile xil_pn:name="i2c_tst_2write.v"/>
+    </transform>
+    <transform xil_pn:end_ts="1445113883" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="3066904216784476668" xil_pn:start_ts="1445113883">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445113883" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="549723400136599994" xil_pn:start_ts="1445113883">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1444900030" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-2798201560535000748" xil_pn:start_ts="1444900030">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445115086" xil_pn:in_ck="8344435638829163307" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1445115086">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="I2C.v"/>
+      <outfile xil_pn:name="clk_gen_tst.v"/>
+      <outfile xil_pn:name="clk_generator.v"/>
+      <outfile xil_pn:name="i2c_tst.v"/>
+      <outfile xil_pn:name="i2c_tst_1write.v"/>
+      <outfile xil_pn:name="i2c_tst_2read.v"/>
+      <outfile xil_pn:name="i2c_tst_2write.v"/>
+    </transform>
+    <transform xil_pn:end_ts="1445115088" xil_pn:in_ck="8344435638829163307" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-8681520302752529097" xil_pn:start_ts="1445115086">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="fuse.log"/>
+      <outfile xil_pn:name="i2c_tst_2read_beh.prj"/>
+      <outfile xil_pn:name="i2c_tst_2read_isim_beh.exe"/>
+      <outfile xil_pn:name="isim"/>
+      <outfile xil_pn:name="xilinxsim.ini"/>
+    </transform>
+    <transform xil_pn:end_ts="1445115088" xil_pn:in_ck="-5030905857733187155" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8295395111831307402" xil_pn:start_ts="1445115088">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="i2c_tst_2read_isim_beh.wdb"/>
+      <outfile xil_pn:name="isim.cmd"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="4727754481102656915" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="-2798201560535000748" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_SubProjectAbstractToPreProxy" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="4631023307864649301" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_SubProjectPreToStructuralProxy" xil_pn:prop_ck="250970745293037926" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445006700" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="-4450752812594645282" xil_pn:start_ts="1445006700">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1445113723" xil_pn:in_ck="1156183597868426630" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="7105495448302733667" xil_pn:start_ts="1445113713">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
+      <outfile xil_pn:name="I2C.lso"/>
+      <outfile xil_pn:name="I2C.ngc"/>
+      <outfile xil_pn:name="I2C.ngr"/>
+      <outfile xil_pn:name="I2C.prj"/>
+      <outfile xil_pn:name="I2C.stx"/>
+      <outfile xil_pn:name="I2C.syr"/>
+      <outfile xil_pn:name="I2C.xst"/>
+      <outfile xil_pn:name="I2C_xst.xrpt"/>
+      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
+      <outfile xil_pn:name="i2c_tst_2write_stx_beh.prj"/>
+      <outfile xil_pn:name="i2c_tst_stx_beh.prj"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <outfile xil_pn:name="xst"/>
+    </transform>
+  </transforms>
+
+</generated_project>

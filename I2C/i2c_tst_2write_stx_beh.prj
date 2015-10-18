@@ -1,0 +1,4 @@
+verilog isim_temp "clk_generator.v"
+verilog isim_temp "I2C.v"
+verilog isim_temp "i2c_tst_2write.v"
+verilog isim_temp "C:/Xilinx/14.5/ISE_DS/ISE//verilog/src/glbl.v"
