@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<?xml version='1.0' encoding='utf-8'?>
+=======
 <?xml version="1.0" encoding="utf-8"?>
+>>>>>>> master
 <!--This is an ISE project configuration file.-->
 <!--It holds project specific layout data for the projectmgr plugin.-->
 <!--Copyright (c) 1995-2009 Xilinx, Inc.  All rights reserved.-->
@@ -8,9 +12,13 @@
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
       </ClosedNodes>
+<<<<<<< HEAD
+      <SelectedItems/>
+=======
       <SelectedItems>
          <SelectedItem>I2C (C:/Users/Camilo/Documents/Xilinx_Workspace/I2C/I2C.v)</SelectedItem>
       </SelectedItems>
+>>>>>>> master
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000120000000020000000000000000000000000200000064ffffffff000000810000000300000002000001200000000100000003000000000000000100000003</ViewHeaderState>
@@ -76,6 +84,21 @@
          <ClosedNode>/I2C C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|I2C.v</ClosedNode>
          <ClosedNode>/clk_gen_tst C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|clk_gen_tst.v</ClosedNode>
          <ClosedNode>/i2c_tst C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|i2c_tst.v</ClosedNode>
+<<<<<<< HEAD
+         <ClosedNode>/i2c_tst_1read C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|i2c_tst_1write.v</ClosedNode>
+         <ClosedNode>/i2c_tst_1write C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|i2c_tst_1write.v</ClosedNode>
+         <ClosedNode>/i2c_tst_2read C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|i2c_tst_2read.v</ClosedNode>
+         <ClosedNode>/i2c_tst_2write C:|Users|Camilo|Documents|Xilinx_Workspace|I2C|i2c_tst_2write.v</ClosedNode>
+      </ClosedNodes>
+      <SelectedItems>
+         <SelectedItem>i2c_tst_2read (C:/Users/Camilo/Documents/Xilinx_Workspace/I2C/i2c_tst_2read.v)</SelectedItem>
+      </SelectedItems>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000000e4000000020000000000000000000000000200000064ffffffff000000810000000300000002000000e40000000100000003000000000000000100000003</ViewHeaderState>
+      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+      <CurrentItem>i2c_tst_2read (C:/Users/Camilo/Documents/Xilinx_Workspace/I2C/i2c_tst_2read.v)</CurrentItem>
+=======
       </ClosedNodes>
       <SelectedItems>
          <SelectedItem>i2c_tst (C:/Users/Camilo/Documents/Xilinx_Workspace/I2C/i2c_tst.v)</SelectedItem>
@@ -85,6 +108,7 @@
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000000cc000000020000000000000000000000000200000064ffffffff000000810000000300000002000000cc0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>i2c_tst (C:/Users/Camilo/Documents/Xilinx_Workspace/I2C/i2c_tst.v)</CurrentItem>
+>>>>>>> master
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -92,27 +116,46 @@
          <ClosedNode>Design Utilities/Compile HDL Simulation Libraries</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
+<<<<<<< HEAD
+         <SelectedItem/>
+=======
          <SelectedItem>Design Utilities</SelectedItem>
+>>>>>>> master
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+<<<<<<< HEAD
+      <CurrentItem/>
+=======
       <CurrentItem>Design Utilities</CurrentItem>
+>>>>>>> master
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="DESUT_VERILOG" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
+<<<<<<< HEAD
+         <SelectedItem>Simulate Behavioral Model</SelectedItem>
+=======
          <SelectedItem></SelectedItem>
+>>>>>>> master
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+<<<<<<< HEAD
+      <CurrentItem>Simulate Behavioral Model</CurrentItem>
+   </ItemView>
+   <SourceProcessView>000000ff00000000000000020000011b0000011b01000000050100000002</SourceProcessView>
+   <CurrentView>Implementation</CurrentView>
+=======
       <CurrentItem></CurrentItem>
    </ItemView>
    <SourceProcessView>000000ff00000000000000020000011b0000011b01000000050100000002</SourceProcessView>
    <CurrentView>Behavioral Simulation</CurrentView>
+>>>>>>> master
 </Project>

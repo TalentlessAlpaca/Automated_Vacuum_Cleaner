@@ -47,14 +47,26 @@
    <wvobject fp_name="/i2c_tst/addr" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">addr[6:0]</obj_property>
       <obj_property name="ObjectShortName">addr[6:0]</obj_property>
+<<<<<<< HEAD
+      <obj_property name="Radix">HEXRADIX</obj_property>
+=======
+>>>>>>> master
    </wvobject>
    <wvobject fp_name="/i2c_tst/reg_addr" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">reg_addr[7:0]</obj_property>
       <obj_property name="ObjectShortName">reg_addr[7:0]</obj_property>
+<<<<<<< HEAD
+      <obj_property name="Radix">HEXRADIX</obj_property>
+=======
+>>>>>>> master
    </wvobject>
    <wvobject fp_name="/i2c_tst/data" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">data[15:0]</obj_property>
       <obj_property name="ObjectShortName">data[15:0]</obj_property>
+<<<<<<< HEAD
+      <obj_property name="Radix">HEXRADIX</obj_property>
+=======
+>>>>>>> master
    </wvobject>
    <wvobject fp_name="/i2c_tst/sda_io" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">sda_io</obj_property>

@@ -32,9 +32,15 @@ module I2C(
 	 output reg [15:0] data_o,
 	 // I2C Specifics
 	 inout sda,
+<<<<<<< HEAD
+	 output reg scl,
+	 // For Simulation
+	 output [5:0] state_o
+=======
 	 output scl,
 	 // For Simulation
 	 output [4:0] state_o
+>>>>>>> master
     );
 	 // Show state
 	 assign state_o = state;
@@ -57,7 +63,10 @@ module I2C(
 	 reg cGen_fSt;
 	 reg [15:0] cGen_lim;
 	 clk_generator cGen(.clk(clk),.rst_n(cGen_rst_n),.en(cGen_en),.f_state(cGen_fSt),.half_t(cGen_half),.limit(cGen_lim),.clk_out(clk_out));
+<<<<<<< HEAD
+=======
 	 assign scl = clk_out;
+>>>>>>> master
 	 // Shift Registers
 	 reg [15:0] shift_data;
 	 reg [15:0] shifted_data;
@@ -65,6 +74,61 @@ module I2C(
 	 reg [3:0] shifts_dummy;
 	 
 	 // Conditions States
+<<<<<<< HEAD
+	 localparam start 		 = 6'd0,
+	 				stop  		 = 6'd1,
+					stop_s		 = 6'd2,
+					stop_w		 = 6'd3,
+	 				ack_r_wait 	 = 6'd4,
+					ack_r_read 	 = 6'd5,
+					ack_w_wait 	 = 6'd6,
+					ack_w_write  = 6'd7,
+	 				nack_w_wait  = 6'd8,
+					nack_w_write = 6'd9,
+					nack_w_write2 = 6'd41;
+	 // Shift Setup
+	 localparam shift_Addr_RW 		= 6'd10,
+					shift_1byte_W 		= 6'd11,
+					shift_1byte_W_D 	= 6'd12,
+					shift_2byte_W 		= 6'd13,
+					shift_2byte_W_D 	= 6'd14,
+					shift_2byte_W_D2 	= 6'd15,
+					shift_1byte_R 		= 6'd16,
+					shift_1byte_RS		= 6'd17,
+					shift_1byte_Add_R	= 6'd18,
+					shift_1byte_R_D 	= 6'd19,
+					shift_2byte_R 		= 6'd20,
+					shift_2byte_RS		= 6'd21,
+					shift_2byte_Add_R	= 6'd22,
+					shift_2byte_R_D 	= 6'd23,
+					shift_2byte_R_D2 	= 6'd24,
+					shift_wait			= 6'd25;
+	 // Write States
+	 localparam shift_hByte = 6'd26,
+	 				shift_lByte = 6'd27;
+	 // Read States
+	 localparam read_hByte = 6'd28,
+	 				read_lByte = 6'd29;
+	 // Shift Process
+	 localparam shift_w 	= 6'd30, // Send bit
+					wait_w	= 6'd31,	// Increment shifts
+					comp_w	= 6'd32,
+					shift_r	= 6'd33,
+					wait_r	= 6'd34,
+					comp_r	= 6'd35;
+	 // Other States
+	 localparam reset	 = 6'd36,
+					idle 	 = 6'd37,
+					init 	 = 6'd38,
+					init2  = 6'd39,
+					err_st = 6'd40;
+					
+	 // State Rgisters
+	 reg [5:0] state;
+	 reg [5:0] next_state;
+	 reg [5:0] state_pointer1;
+	 reg [5:0] state_pointer2;
+=======
 	 localparam start 		 = 0,
 	 				stop  		 = 1,
 					stop_s		 = 30,
@@ -108,6 +172,7 @@ module I2C(
 	 reg [4:0] next_state;
 	 reg [4:0] state_pointer1;
 	 reg [4:0] state_pointer2;
+>>>>>>> master
 	 reg pointing;
 	 // Finite State Machines
 	 always@(posedge clk) begin
@@ -122,6 +187,19 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
+				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1'b0;
+				cGen_fSt 	<= 1'b1;
+				cGen_lim 	<= 1'b0;
+				// Outputs
+				busy			<= 1'b1;
+				err			<= 1'b1;
+				data_o		<= 16'h0;
+				
+				shift_data 		<= 16'h0;
+				shifted_data	<= 16'h0;
+=======
 				rrww 			<= 1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 0;
 				cGen_fSt 	<= 1;
@@ -133,6 +211,7 @@ module I2C(
 				
 				shift_data 		<= 0;
 				shifted_data	<= 0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -149,14 +228,24 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
+				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1'b0;
+				cGen_fSt 	<= 1'b1;
+=======
 				rrww 			<= 1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 0;
 				cGen_fSt 	<= 1;
+>>>>>>> master
 				cGen_lim 	<= 16'd1000; // SCL frequency of 50kHz
 				// Outputs
 				busy			<= 0;
 				err			<= 0;
+<<<<<<< HEAD
+				data_o		<=  data_o;
+=======
 				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -174,6 +263,16 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
+				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1'b1;
+				cGen_fSt 	<= 1'b1;
+				cGen_lim 	<= 16'd1000; // SCL frequency of 50kHz
+				// Outputs
+				busy			<= 1'b0;
+				err			<= 1'b0;
+				data_o		<= 16'h0;
+=======
 				rrww 			<= 1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1;
 				cGen_fSt 	<= 1;
@@ -182,6 +281,7 @@ module I2C(
 				busy			<= 0;
 				err			<= 0;
 				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -199,6 +299,16 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
+				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1'b1;
+				cGen_fSt 	<= 1'b1;
+				cGen_lim 	<= 16'd1000; // SCL frequency of 50kHz
+				// Outputs
+				busy			<= 1'b1;
+				err			<= 1'b0;
+				data_o		<= 16'h0;
+=======
 				rrww 			<= 1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 1;
 				cGen_fSt 	<= 1;
@@ -207,6 +317,7 @@ module I2C(
 				busy			<= 1;
 				err			<= 0;
 				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -224,6 +335,16 @@ module I2C(
 				// Regs
 				a 				<= 1'bz;
 				b 				<= sda;
+<<<<<<< HEAD
+				rrww 			<= 1'b1;		// Writes 'Z' to SDA bus
+				cGen_rst_n	<= 1'b0;
+				cGen_fSt 	<= 1'b1;
+				cGen_lim 	<= 1'b0;
+				// Outputs
+				busy			<= 1'b0;
+				err			<= 1'b1;
+				data_o		<= 16'h0;
+=======
 				rrww 			<= 1;		// Writes 'Z' to SDA bus
 				cGen_rst_n	<= 0;
 				cGen_fSt 	<= 1;
@@ -232,6 +353,7 @@ module I2C(
 				busy			<= 0;
 				err			<= 1;
 				data_o		<=  8'h0;
+>>>>>>> master
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -244,29 +366,34 @@ module I2C(
 				*/
 				next_state <= err_st;
 			 end
+<<<<<<< HEAD
+			 /////////////////////////////////////////// Protocol ///////////////////////////////////////////////////
+=======
 			 /////// Protocol ///////
+>>>>>>> master
 			 	// Write Byte
 			 shift_1byte_W: begin
 				// Regs
 				a 							<= 1'b0;
 				b 							<= sda;
-				rrww 						<= 1;
-				cGen_rst_n				<= 1;
-				cGen_fSt 				<= 1;
+<<<<<<< HEAD
+				rrww 						<= 1'b1;
+				cGen_rst_n				<= 1'b1;
+				cGen_fSt 				<= 1'b1;
 				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
 				shift_data [15:8]		<= reg_addr;
 				shifted_data		 	<= 16'h0;
 				shifts					<= 0;
 				shifts_dummy			<= 0;
 				// Outputs
-				busy			<= 1;
-				err			<= 0;
-				data_o		<= 8'h0;
+				busy			<= 1'b1;
+				err			<= 1'b0;
+				data_o		<= 16'h0;
 				// Pointers
 				
 				state_pointer1 <= shift_1byte_W_D;
 				state_pointer2 <= ack_r_wait;
-				pointing			<= 1;
+				pointing			<= 1'b1;
 				/* wires/inputs
 				/    clk_out
 				/    cGen_half 
@@ -284,18 +411,18 @@ module I2C(
 				// Regs
 				a 							<= 1'b0;
 				b 							<= sda;
-				rrww 						<= 1;
-				cGen_rst_n				<= 1;
-				cGen_fSt 				<= 1;
+				rrww 						<= 1'b1;
+				cGen_rst_n				<= 1'b1;
+				cGen_fSt 				<= 1'b1;
 				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
 				shift_data				<= data;
 				shifted_data		 	<= 16'h0;
 				shifts					<= 0;
 				shifts_dummy			<= 0;
 				// Outputs
-				busy			<= 1;
-				err			<= 0;
-				data_o		<= 8'h0;
+				busy			<= 1'b1;
+				err			<= 1'b0;
+				data_o		<= 16'h0;
 				// Pointers
 				
 				state_pointer1 <= stop;
@@ -311,6 +438,390 @@ module I2C(
 				/	  reg_addr
 				/	  data
 				*/
+				if(cGen_half) next_state <= shift_w;
+				else next_state <= shift_1byte_W_D;
+			 end
+			 	// Write 2 Bytes
+			 shift_2byte_W: begin
+				// Regs
+				a 							<= 1'b0;
+				b 							<= sda;
+=======
+>>>>>>> master
+				rrww 						<= 1;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data [15:8]		<= reg_addr;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				
+<<<<<<< HEAD
+				state_pointer1 <= shift_2byte_W_D;
+=======
+				state_pointer1 <= shift_1byte_W_D;
+>>>>>>> master
+				state_pointer2 <= ack_r_wait;
+				pointing			<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_w;
+<<<<<<< HEAD
+				else next_state <= shift_2byte_W;
+			 end
+			 shift_2byte_W_D: begin
+=======
+				else next_state <= shift_1byte_W;
+			 end
+			 shift_1byte_W_D: begin
+>>>>>>> master
+				// Regs
+				a 							<= 1'b0;
+				b 							<= sda;
+				rrww 						<= 1;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= data;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+<<<<<<< HEAD
+				state_pointer1 <= shift_2byte_W_D2;
+				state_pointer2 <= ack_r_wait;
+				pointing			<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_w;
+				else next_state <= shift_2byte_W_D;
+			 end
+			 shift_2byte_W_D2: begin
+				// Regs
+				a 							<= 1'b0;
+				b 							<= sda;
+				rrww 						<= 1;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= shift_data;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+=======
+				
+>>>>>>> master
+				state_pointer1 <= stop;
+				state_pointer2 <= ack_r_wait;
+				pointing			<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+<<<<<<< HEAD
+				if(cGen_half) next_state <= shift_w;
+				else next_state <= shift_2byte_W_D2;
+			 end
+			 	// Read Byte
+			 shift_1byte_R: begin
+				// Regs
+				a 							<= 1'b0;
+				b 							<= sda;
+				rrww 						<= 1;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data [15:8]		<= reg_addr;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1 <= shift_1byte_RS;
+				state_pointer2 <= ack_r_wait;
+				pointing			<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_w;
+				else next_state <= shift_1byte_R;
+			 end
+			 shift_1byte_RS: begin
+				a 							<= 1'bz;
+				b 							<= sda;
+				rrww 						<= 1;
+				state_pointer1 <= shift_1byte_RS;
+				state_pointer2 <= shift_1byte_Add_R;
+				pointing			<= 1;
+				if(clk_out&&cGen_half)  next_state <= start;
+				else 							next_state <= shift_1byte_RS;
+			 end
+			 shift_1byte_Add_R: begin
+			 	// Regs
+			 	a 							<= 1'b0;
+			 	b 							<= sda;
+			 	rrww 						<= 1;		// Writes '0' to SDA bus
+			 	cGen_rst_n				<= 1;
+			 	cGen_fSt 				<= 1;
+			 	cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+			 	shift_data [15:9]		<= addr;
+			 	shift_data [8]			<= 1;
+			 	shifted_data		 	<= 16'h0;
+			 	shifts					<= 0;
+			 	shifts_dummy			<= 0;
+			 	// Outputs
+			 	busy			<= 1;
+			 	err			<= 0;
+			 	data_o		<= 8'h0;
+			 	// Pointers
+			 	 
+			  	state_pointer1 <= shift_1byte_R_D;
+			 	state_pointer2 <= ack_r_wait;
+			 	
+			 	pointing			<= 1;
+			 	/* wires/inputs
+			 	/    clk_out
+			 	/    cGen_half 
+			 	/    cGen_en
+			 	/	  en
+			 	/	  rw
+			 	/	  addr
+			 	/	  reg_addr
+			 	/	  data
+			 	*/
+			 	if(cGen_half) next_state <= shift_w;
+			 	else next_state <= shift_1byte_Add_R;
+			 end
+			 shift_1byte_R_D: begin
+				// Regs
+				a 						<= 1'bz;
+				b 						<= sda;
+				rrww 					<= 0;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= 16'h0;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy		<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1  <= stop;
+				state_pointer2  <= nack_w_wait;
+				pointing		<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_r;
+				else next_state <= shift_1byte_R_D;
+			 end		 
+			 
+			 	// Read 2 Bytes
+			 shift_2byte_R: begin
+				// Regs
+				a 							<= 1'b0;
+				b 							<= sda;
+				rrww 						<= 1;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data [15:8]		<= reg_addr;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1 <= shift_2byte_RS;
+				state_pointer2 <= ack_r_wait;
+				pointing			<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_w;
+				else next_state <= shift_2byte_R;
+			 end
+			 shift_2byte_RS: begin
+				a 							<= 1'bz;
+				b 							<= sda;
+				rrww 						<= 1;
+				state_pointer1 <= shift_2byte_RS;
+				state_pointer2 <= shift_2byte_Add_R;
+				pointing			<= 1;
+				if(clk_out&&cGen_half)  next_state <= start;
+				else 							next_state <= shift_2byte_RS;
+			 end
+			 shift_2byte_Add_R: begin
+			 	// Regs
+			 	a 							<= 1'b0;
+			 	b 							<= sda;
+			 	rrww 						<= 1;		// Writes '0' to SDA bus
+			 	cGen_rst_n				<= 1;
+			 	cGen_fSt 				<= 1;
+			 	cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+			 	shift_data [15:9]		<= addr;
+			 	shift_data [8]			<= 1;
+			 	shifted_data		 	<= 16'h0;
+			 	shifts					<= 0;
+			 	shifts_dummy			<= 0;
+			 	// Outputs
+			 	busy			<= 1;
+			 	err			<= 0;
+			 	data_o		<= 8'h0;
+			 	// Pointers
+			 	 
+			  	state_pointer1 <= shift_2byte_R_D;
+			 	state_pointer2 <= ack_r_wait;
+			 	
+			 	pointing			<= 1;
+			 	/* wires/inputs
+			 	/    clk_out
+			 	/    cGen_half 
+			 	/    cGen_en
+			 	/	  en
+			 	/	  rw
+			 	/	  addr
+			 	/	  reg_addr
+			 	/	  data
+			 	*/
+			 	if(cGen_half) next_state <= shift_w;
+			 	else next_state <= shift_2byte_Add_R;
+			 end
+			 shift_2byte_R_D: begin
+				// Regs
+				a 						<= 1'bz;
+				b 						<= sda;
+				rrww 					<= 0;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= 16'h0;
+				shifted_data		 	<= 16'h0;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy		<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1  <= shift_2byte_R_D2;
+				state_pointer2  <= ack_w_wait;
+				pointing		<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_r;
+				else next_state <= shift_2byte_R_D;
+			 end
+
+			 shift_2byte_R_D2: begin
+				// Regs
+				a 						<= 1'bz;
+				b 						<= sda;
+				rrww 					<= 0;
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= shift_data;
+				shifted_data		 	<= shifted_data;
+				shifts					<= 0;
+				shifts_dummy			<= 0;
+				// Outputs
+				busy		<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1  <= stop;
+				state_pointer2  <= nack_w_wait;
+				pointing		<= 1;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(cGen_half) next_state <= shift_r;
+				else next_state <= shift_2byte_R_D2;
+			 end
+			 
+=======
 				if(cGen_half)next_state <= shift_w;
 			 end
 			 	// Write 2 Bytes
@@ -325,6 +836,7 @@ module I2C(
 			 shift_2byte_R: begin
 			 
 			 end
+>>>>>>> master
 			 shift_wait: begin
 				pointing <= 0;
 				if(!clk_out) next_state <= state_pointer1;
@@ -339,7 +851,11 @@ module I2C(
 				cGen_fSt 				<= 1;
 				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
 				shift_data [15:9]		<= addr;
+<<<<<<< HEAD
+				shift_data [8]			<= 0;
+=======
 				shift_data [8]			<= rw;
+>>>>>>> master
 				shifted_data		 	<= 16'h0;
 				shifts					<= 0;
 				shifts_dummy			<= 0;
@@ -373,19 +889,32 @@ module I2C(
 			 end
 			 shift_w: begin
 				// Regs
+<<<<<<< HEAD
+				a 							<= shift_data[15] ? 1'bz : 1'b0;
+				b 							<= sda;
+				rrww 						<= 1'b1;		// If shift_data[15] = 1, writes 'z'; else, writes 0
+				cGen_rst_n				<= 1'b1;
+				cGen_fSt 				<= 1'b1;
+=======
 				a 							<= shift_data[15] ? 1'bz : 0;
 				b 							<= sda;
 				rrww 						<= 1;		// If shift_data[15] = 1, writes 'z'; else, writes 0
 				cGen_rst_n				<= 1;
 				cGen_fSt 				<= 1;
+>>>>>>> master
 				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
 				shift_data				<= shift_data;
 				shifted_data		 	<= shift_data<<1;
 				shifts					<= shifts;
 				shifts_dummy			<= shifts+1;
 				// Outputs
+<<<<<<< HEAD
+				busy			<= 1'b1;
+				err			<= 1'b0;
+=======
 				busy			<= 1;
 				err			<= 0;
+>>>>>>> master
 				data_o		<= 8'h0;
 				// Pointers
 				state_pointer1 <= state_pointer1;
@@ -476,6 +1005,122 @@ module I2C(
 					else				next_state <= state_pointer1;
 				end
 			 end
+<<<<<<< HEAD
+			 
+			 shift_r: begin
+				// Regs
+				a 							<= 1'bz;
+				b 							<= sda;
+				rrww 						<= 1'b0;		// Sets SDA as input, it's value is stored in b
+				cGen_rst_n				<= 1'b1;
+				cGen_fSt 				<= 1'b1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data[7:1]		<= shift_data[7:1];
+				shift_data[0]			<= b;
+				shifted_data		 	<= shift_data<<1;
+				shifts					<= shifts;
+				shifts_dummy			<= shifts+1;
+				// Outputs
+				busy			<= 1'b1;
+				err			<= 1'b0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1 <= state_pointer1;
+				state_pointer2 <= state_pointer2;
+				pointing			<= pointing;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(clk_out&&cGen_half) next_state <= wait_r;
+				else next_state <= shift_r;
+			 end
+			 wait_r: begin
+				// Regs
+				a 							<= a;
+				b 							<= sda;
+				rrww 						<= 1'b0;		// Keeps SDA as input
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				if(shifts_dummy < 8) begin
+					shift_data				<= shifted_data;
+					shifted_data		 	<= shifted_data;
+				end
+				else begin
+					shift_data				<= shift_data;
+					shifted_data		 	<= shifted_data;
+				end
+				shifts					<= shifts_dummy;
+				shifts_dummy			<= shifts_dummy;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1 <= state_pointer1;
+				state_pointer2 <= state_pointer2;
+				pointing			<= pointing;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(!clk_out) next_state <= comp_r;
+				else next_state <= wait_r;
+			 end
+			 comp_r: begin
+				// Regs
+				a 							<= a;
+				b 							<= sda;
+				rrww 						<= 1'b0;		// Keeps SDA as input
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= shift_data;
+				shifted_data		 	<= shifted_data;
+				shifts					<= shifts;
+				shifts_dummy			<= shifts_dummy;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1 <= state_pointer1;
+				state_pointer2 <= state_pointer2;
+				pointing			<= pointing;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(shifts < 8) begin
+					if(cGen_half) 	next_state <= shift_r;
+					else 				next_state <= comp_r;
+				end
+				else begin
+					if(pointing)	next_state <= state_pointer2;
+					else				next_state <= state_pointer1;
+				end
+			 end
+=======
+>>>>>>> master
 			 /////// Conditions ///////
 			 start: begin
 				// Regs
@@ -499,7 +1144,17 @@ module I2C(
 				/	  reg_addr
 				/	  data
 				*/
+<<<<<<< HEAD
+				if(!clk_out) begin
+					if(rw) begin
+						if(pointing) next_state <= state_pointer2;
+						else next_state <= shift_Addr_RW;
+					end
+					else next_state <= shift_Addr_RW;
+				end
+=======
 				if(!clk_out) next_state <= shift_Addr_RW;
+>>>>>>> master
 				else next_state <= start;
 			 end
 			 stop: begin
@@ -644,12 +1299,82 @@ module I2C(
 				else next_state <= ack_r_read;
 			 end
 			 ack_w_wait: begin
+<<<<<<< HEAD
+				// Regs
+				a 							<= 1'b0;
+				b 							<= sda;
+				rrww 						<= 1'b1;		// Sets SDA as output, writes 0
+				cGen_rst_n				<= 1;
+				cGen_fSt 				<= 1;
+				cGen_lim 				<= 16'd1000; // SCL frequency of 50kHz
+				shift_data				<= shifted_data;
+				shifted_data 			<= shifted_data;
+				shifts					<= shifts;
+				shifts_dummy			<= shifts_dummy;
+				// Outputs
+				busy			<= 1;
+				err			<= 0;
+				data_o		<= 8'h0;
+				// Pointers
+				state_pointer1 <= state_pointer1;
+				state_pointer2 <= state_pointer2;
+				pointing			<= 0;
+				/* wires/inputs
+				/    clk_out
+				/    cGen_half 
+				/    cGen_en
+				/	  en
+				/	  rw
+				/	  addr
+				/	  reg_addr
+				/	  data
+				*/
+				if(clk_out) next_state <= ack_w_write;
+				else next_state <= ack_w_wait;
+			 end
+			 ack_w_write: begin
+				shift_data <= shift_data;
+				shifted_data <= shifted_data;
+				state_pointer2 <= shift_wait;
+				if(cGen_half) next_state <= state_pointer2;
+				else next_state <= ack_w_write;
+			 end
+			 
+			 nack_w_wait: begin
+				//shifted_data <= shift_data >> 1;
+				if(cGen_half) next_state <= nack_w_write;
+				else next_state <= nack_w_wait;
+			 end
+			 nack_w_write: begin
+				a 							<= 1'bz;
+				b 							<= sda;
+				rrww 						<= 1'b1;		// Sets SDA as output, writes z
+				/*shift_data <= shifted_data;
+				shifted_data <= shifted_data;*/
+				if(clk_out) next_state <= nack_w_write2;
+				else next_state <= nack_w_write;
+			 end
+			 nack_w_write2: begin
+				data_o <= shift_data;
+				if(!clk_out) next_state <= stop;
+				else next_state <= nack_w_write2;
+=======
 				
 			 end
 			 nack_w_wait: begin
 				
+>>>>>>> master
 			 end
 		endcase
 	end
 	 
+<<<<<<< HEAD
+	 
+	 always@(*) begin
+		if(clk_out) scl <= 1'bz;
+		else			scl <= 1'b0;
+	 end
+	 
+=======
+>>>>>>> master
 endmodule
