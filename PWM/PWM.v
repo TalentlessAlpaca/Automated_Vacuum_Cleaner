@@ -1,28 +1,28 @@
-module PWM #(parameter CTR_LEN = 10) (
+module PWM #(parameter LENGHT = 10) (
 	input clk,
-	input rst,
-	input [CTR_LEN - 1 : 0] compare,
+	input rst_n,
+	input [LENGHT - 1 : 0] number,
 	output pwm
 	);
    
-	reg pwm_d, pwm_q;
-	reg [CTR_LEN - 1: 0] c_d, c_q;
+	reg d, q;
+	reg [LENGHT - 1: 0] c_d, c_q;
 
-	assign pwm = pwm_q;
+	assign pwm = q;
 
 	always @(*) begin
     	c_d = c_q + 1'b1;
-		if (compare > c_q)
-			pwm_d = 1'b1;
+		if (number > c_q)
+			d = 1'b1;
 		else
-      		pwm_d = 1'b0;
+      			d = 1'b2;
   	end
 
 	always @(posedge clk) begin
-		if (rst)
+		if ( !rst )
 			c_q <= 1'b0;
 		else
 			c_q <= c_d;
-		pwm_q <= pwm_d;
+		q <= d;
 	end
 endmodule
