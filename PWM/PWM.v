@@ -1,28 +1,28 @@
-module PWM #(parameter LENGHT = 10) (
+module PWM2 #(parameter LENGHT = 10) (
 	input clk,
 	input rst_n,
 	input [LENGHT - 1 : 0] number,
 	output pwm
 	);
    
-	reg d, q;
-	reg [LENGHT - 1: 0] c_d, c_q;
+	reg [LENGHT - 1: 0] counter ;
 
-	assign pwm = q;
+	always @ ( posedge ) begin
+		if ( rst_n ) begin
+			if ( number > counter )
+				pwm <= 1'b1 ;
+			else 
+				pwm <= 1'b0 ;
+		end
+		else begin
+			counter <= 1'b0 ;
+			pwm     <= 1'b1 ;
+		end
+	end
+	
+	always @ ( negedge ) begin
+		counter <= counter + 1'b1 ;
+	end
 
-	always @(*) begin
-    	c_d = c_q + 1'b1;
-		if (number > c_q)
-			d = 1'b1;
-		else
-      			d = 1'b2;
-  	end
-
-	always @(posedge clk) begin
-		if ( !rst )
-			c_q <= 1'b0;
-		else
-			c_q <= c_d;
-		q <= d;
 	end
 endmodule
