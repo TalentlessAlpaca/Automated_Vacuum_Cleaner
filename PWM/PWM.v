@@ -23,6 +23,4 @@ module PWM2 #(parameter LENGHT = 10) (
 	always @ ( negedge ) begin
 		counter <= counter + 1'b1 ;
 	end
-
-	end
 endmodule
