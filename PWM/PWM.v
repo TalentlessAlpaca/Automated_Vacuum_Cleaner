@@ -1,4 +1,4 @@
-module PWM2 #(parameter LENGHT = 10) (
+module PWM #(parameter LENGHT = 10) (
 	input clk,
 	input rst_n,
 	input [LENGHT - 1 : 0] number,
