@@ -6,6 +6,7 @@ module PWM #(parameter LENGHT = 10) (
 	);
    
 	reg [LENGHT - 1: 0] counter ;
+	reg [LENGHT - 1: 0] counter_temp ;
 
 		always @ ( posedge ) begin
 		if ( rst_n ) begin
@@ -21,7 +22,7 @@ module PWM #(parameter LENGHT = 10) (
 	end
 	
 	always @ ( * ) begin
-		counter = counter_temp
+		counter = counter_temp ;
 		counter = counter + 1'b1 ;
 	end
 endmodule
