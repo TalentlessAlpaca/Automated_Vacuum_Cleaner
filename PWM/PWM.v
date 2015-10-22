@@ -7,7 +7,7 @@ module PWM #(parameter LENGHT = 10) (
    
 	reg [LENGHT - 1: 0] counter ;
 
-	always @ ( posedge ) begin
+		always @ ( posedge ) begin
 		if ( rst_n ) begin
 			if ( number > counter )
 				pwm <= 1'b1 ;
@@ -15,12 +15,13 @@ module PWM #(parameter LENGHT = 10) (
 				pwm <= 1'b0 ;
 		end
 		else begin
-			counter <= 1'b0 ;
-			pwm     <= 1'b1 ;
+			counter_temp 	<= 1'b0 ;
+			pwm     		<= 1'b1 ;
 		end
 	end
 	
-	always @ ( negedge ) begin
-		counter <= counter + 1'b1 ;
+	always @ ( * ) begin
+		counter = counter_temp
+		counter = counter + 1'b1 ;
 	end
 endmodule
