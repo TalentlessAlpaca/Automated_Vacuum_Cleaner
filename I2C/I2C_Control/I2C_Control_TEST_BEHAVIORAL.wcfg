@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/Camilo/Documents/Xilinx_Workspace/I2C_2/i2c_write3byte_tf_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="i2c_write3byte_tf" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="18" />
+   <wvobject fp_name="/i2c_write3byte_tf/sda" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sda</obj_property>
+      <obj_property name="ObjectShortName">sda</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/scl" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">scl</obj_property>
+      <obj_property name="ObjectShortName">scl</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/rst_n" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst_n</obj_property>
+      <obj_property name="ObjectShortName">rst_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/sda_buffer" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sda_buffer</obj_property>
+      <obj_property name="ObjectShortName">sda_buffer</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/sda_io" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sda_io</obj_property>
+      <obj_property name="ObjectShortName">sda_io</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/scl_buffer" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">scl_buffer</obj_property>
+      <obj_property name="ObjectShortName">scl_buffer</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/scl_io" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">scl_io</obj_property>
+      <obj_property name="ObjectShortName">scl_io</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/tiks" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">tiks[3:0]</obj_property>
+      <obj_property name="ObjectShortName">tiks[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state[5:0]</obj_property>
+      <obj_property name="ObjectShortName">state[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state[5:0]</obj_property>
+      <obj_property name="ObjectShortName">state[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/nextState" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">nextState[5:0]</obj_property>
+      <obj_property name="ObjectShortName">nextState[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/nextState" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">nextState[5:0]</obj_property>
+      <obj_property name="ObjectShortName">nextState[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/pointer" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pointer[5:0]</obj_property>
+      <obj_property name="ObjectShortName">pointer[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/i2c_lab" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i2c_lab[2:0]</obj_property>
+      <obj_property name="ObjectShortName">i2c_lab[2:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/i2c_data_in" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i2c_data_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i2c_data_in[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/i2c/prer" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">prer[15:0]</obj_property>
+      <obj_property name="ObjectShortName">prer[15:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_write3byte_tf/uut/i2c/txr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">txr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">txr[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+</wave_config>

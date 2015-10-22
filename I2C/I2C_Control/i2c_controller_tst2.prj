@@ -1,0 +1,4 @@
+verilog work "i2c_master_bit_ctrl.v"
+verilog work "i2c_master_byte_ctrl.v"
+verilog work "i2c_master_top.v"
+verilog work "i2c_controller_tst2.v"

@@ -1,0 +1,19 @@
+Release 14.5 - par P.58f (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Wed Oct 21 20:46:41 2015
+
+All signals are completely routed.
+
+WARNING:ParHelpers:361 - There are 7 loadless signals in this design. This design will cause Bitgen to issue DRC
+   warnings.
+
+   i2c_data_out<0>
+   i2c_data_out<2>
+   i2c_data_out<3>
+   i2c_data_out<4>
+   i2c_data_out<5>
+   i2c_data_out<6>
+   i2c_int
+
+

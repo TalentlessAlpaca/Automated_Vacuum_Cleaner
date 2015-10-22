@@ -1,0 +1,2 @@
+verilog work "netgen/par/i2c_controller_tst2_timesim.v"
+verilog work "i2c_write3byte_tf.v"

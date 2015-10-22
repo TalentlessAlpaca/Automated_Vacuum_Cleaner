@@ -1,0 +1,13 @@
+//! **************************************************************************
+// Written by: Map P.58f on Wed Oct 21 20:46:34 2015
+//! **************************************************************************
+
+SCHEMATIC START;
+CONFIG VCCAUX = "3.3";
+COMP "clk" LOCATE = SITE "V10" LEVEL 1;
+COMP "sda" LOCATE = SITE "U7" LEVEL 1;
+COMP "scl" LOCATE = SITE "V7" LEVEL 1;
+COMP "rst_n" LOCATE = SITE "M16" LEVEL 1;
+NET "clk_BUFGP/IBUFG" PERIOD = 10 ns HIGH 50%;
+SCHEMATIC END;
+

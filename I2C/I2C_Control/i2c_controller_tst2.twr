@@ -1,0 +1,557 @@
+--------------------------------------------------------------------------------
+Release 14.5 Trace  (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.5\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 3
+-n 3 -fastpaths -xml i2c_controller_tst2.twx i2c_controller_tst2.ncd -o
+i2c_controller_tst2.twr i2c_controller_tst2.pcf -ucf pinout.ucf
+
+Design file:              i2c_controller_tst2.ncd
+Physical constraint file: i2c_controller_tst2.pcf
+Device,package,speed:     xc6slx9,csg324,C,-3 (PRODUCTION 1.23 2013-03-26)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: NET "clk_BUFGP/IBUFG" PERIOD = 10 ns HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 4879 paths analyzed, 768 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   5.002ns.
+--------------------------------------------------------------------------------
+
+Paths for end point i2c_lab_1 (SLICE_X13Y25.DX), 143 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     4.998ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_1 (FF)
+  Destination:          i2c_lab_1 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.949ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.018ns (0.232 - 0.250)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_1 to i2c_lab_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X16Y26.CQ      Tcko                  0.447   state<1>
+                                                       state_1
+    SLICE_X13Y27.C1      net (fanout=79)       1.124   state<1>
+    SLICE_X13Y27.C       Tilo                  0.259   state[5]_GND_1_o_equal_43_o
+                                                       _n01721
+    SLICE_X13Y24.B4      net (fanout=3)        0.688   _n0172
+    SLICE_X13Y24.B       Tilo                  0.259   N154
+                                                       Mmux_i2c_lab_d2_SW0
+    SLICE_X13Y25.C2      net (fanout=1)        0.694   N154
+    SLICE_X13Y25.C       Tilo                  0.259   i2c_lab<1>
+                                                       Mmux_i2c_lab_d2
+    SLICE_X13Y25.DX      net (fanout=1)        1.156   i2c_lab_d<1>
+    SLICE_X13Y25.CLK     Tdick                 0.063   i2c_lab<1>
+                                                       i2c_lab_1
+    -------------------------------------------------  ---------------------------
+    Total                                      4.949ns (1.287ns logic, 3.662ns route)
+                                                       (26.0% logic, 74.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     5.200ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_4 (FF)
+  Destination:          i2c_lab_1 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.744ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.021ns (0.232 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_4 to i2c_lab_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X18Y27.AQ      Tcko                  0.408   state<5>
+                                                       state_4
+    SLICE_X14Y24.A1      net (fanout=78)       1.150   state<4>
+    SLICE_X14Y24.A       Tilo                  0.205   _n0176
+                                                       state[5]_GND_1_o_equal_26_o<5>1
+    SLICE_X14Y25.C1      net (fanout=15)       0.651   state[5]_GND_1_o_equal_26_o
+    SLICE_X14Y25.CMUX    Tilo                  0.343   _n0168
+                                                       Mmux_i2c_lab_d2211_SW1_G
+                                                       Mmux_i2c_lab_d2211_SW1
+    SLICE_X13Y25.C4      net (fanout=1)        0.509   N77
+    SLICE_X13Y25.C       Tilo                  0.259   i2c_lab<1>
+                                                       Mmux_i2c_lab_d2
+    SLICE_X13Y25.DX      net (fanout=1)        1.156   i2c_lab_d<1>
+    SLICE_X13Y25.CLK     Tdick                 0.063   i2c_lab<1>
+                                                       i2c_lab_1
+    -------------------------------------------------  ---------------------------
+    Total                                      4.744ns (1.278ns logic, 3.466ns route)
+                                                       (26.9% logic, 73.1% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     5.214ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_3 (FF)
+  Destination:          i2c_lab_1 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.730ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.021ns (0.232 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_3 to i2c_lab_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X16Y27.CQ      Tcko                  0.447   state<3>
+                                                       state_3
+    SLICE_X14Y24.A2      net (fanout=79)       1.097   state<3>
+    SLICE_X14Y24.A       Tilo                  0.205   _n0176
+                                                       state[5]_GND_1_o_equal_26_o<5>1
+    SLICE_X14Y25.C1      net (fanout=15)       0.651   state[5]_GND_1_o_equal_26_o
+    SLICE_X14Y25.CMUX    Tilo                  0.343   _n0168
+                                                       Mmux_i2c_lab_d2211_SW1_G
+                                                       Mmux_i2c_lab_d2211_SW1
+    SLICE_X13Y25.C4      net (fanout=1)        0.509   N77
+    SLICE_X13Y25.C       Tilo                  0.259   i2c_lab<1>
+                                                       Mmux_i2c_lab_d2
+    SLICE_X13Y25.DX      net (fanout=1)        1.156   i2c_lab_d<1>
+    SLICE_X13Y25.CLK     Tdick                 0.063   i2c_lab<1>
+                                                       i2c_lab_1
+    -------------------------------------------------  ---------------------------
+    Total                                      4.730ns (1.317ns logic, 3.413ns route)
+                                                       (27.8% logic, 72.2% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point i2c_data_in_0 (SLICE_X15Y22.AX), 138 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     5.183ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_4 (FF)
+  Destination:          i2c_data_in_0 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.762ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.020ns (0.233 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_4 to i2c_data_in_0
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X18Y27.AQ      Tcko                  0.408   state<5>
+                                                       state_4
+    SLICE_X12Y23.A1      net (fanout=78)       1.455   state<4>
+    SLICE_X12Y23.A       Tilo                  0.203   state[5]_GND_1_o_equal_18_o
+                                                       state[5]_GND_1_o_equal_19_o<5>1
+    SLICE_X16Y24.D4      net (fanout=12)       0.849   state[5]_GND_1_o_equal_19_o
+    SLICE_X16Y24.CMUX    Topdc                 0.368   state[5]_GND_1_o_equal_17_o
+                                                       Mmux_i2c_data_in_d1_SW0_SW1_F
+                                                       Mmux_i2c_data_in_d1_SW0_SW1
+    SLICE_X15Y22.B5      net (fanout=1)        0.610   N64
+    SLICE_X15Y22.B       Tilo                  0.259   i2c_data_in<1>
+                                                       Mmux_i2c_data_in_d1
+    SLICE_X15Y22.AX      net (fanout=1)        0.547   i2c_data_in_d<0>
+    SLICE_X15Y22.CLK     Tdick                 0.063   i2c_data_in<1>
+                                                       i2c_data_in_0
+    -------------------------------------------------  ---------------------------
+    Total                                      4.762ns (1.301ns logic, 3.461ns route)
+                                                       (27.3% logic, 72.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     5.190ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_4 (FF)
+  Destination:          i2c_data_in_0 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.755ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.020ns (0.233 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_4 to i2c_data_in_0
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X18Y27.AQ      Tcko                  0.408   state<5>
+                                                       state_4
+    SLICE_X12Y23.A1      net (fanout=78)       1.455   state<4>
+    SLICE_X12Y23.A       Tilo                  0.203   state[5]_GND_1_o_equal_18_o
+                                                       state[5]_GND_1_o_equal_19_o<5>1
+    SLICE_X16Y24.C4      net (fanout=12)       0.849   state[5]_GND_1_o_equal_19_o
+    SLICE_X16Y24.CMUX    Tilo                  0.361   state[5]_GND_1_o_equal_17_o
+                                                       Mmux_i2c_data_in_d1_SW0_SW1_G
+                                                       Mmux_i2c_data_in_d1_SW0_SW1
+    SLICE_X15Y22.B5      net (fanout=1)        0.610   N64
+    SLICE_X15Y22.B       Tilo                  0.259   i2c_data_in<1>
+                                                       Mmux_i2c_data_in_d1
+    SLICE_X15Y22.AX      net (fanout=1)        0.547   i2c_data_in_d<0>
+    SLICE_X15Y22.CLK     Tdick                 0.063   i2c_data_in<1>
+                                                       i2c_data_in_0
+    -------------------------------------------------  ---------------------------
+    Total                                      4.755ns (1.294ns logic, 3.461ns route)
+                                                       (27.2% logic, 72.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     5.200ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_5 (FF)
+  Destination:          i2c_data_in_0 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.745ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.020ns (0.233 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_5 to i2c_data_in_0
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X18Y27.CQ      Tcko                  0.408   state<5>
+                                                       state_5
+    SLICE_X12Y23.B1      net (fanout=79)       1.482   state<5>
+    SLICE_X12Y23.B       Tilo                  0.203   state[5]_GND_1_o_equal_18_o
+                                                       state[5]_GND_1_o_equal_18_o<5>1
+    SLICE_X16Y24.C3      net (fanout=16)       0.812   state[5]_GND_1_o_equal_18_o
+    SLICE_X16Y24.CMUX    Tilo                  0.361   state[5]_GND_1_o_equal_17_o
+                                                       Mmux_i2c_data_in_d1_SW0_SW1_G
+                                                       Mmux_i2c_data_in_d1_SW0_SW1
+    SLICE_X15Y22.B5      net (fanout=1)        0.610   N64
+    SLICE_X15Y22.B       Tilo                  0.259   i2c_data_in<1>
+                                                       Mmux_i2c_data_in_d1
+    SLICE_X15Y22.AX      net (fanout=1)        0.547   i2c_data_in_d<0>
+    SLICE_X15Y22.CLK     Tdick                 0.063   i2c_data_in<1>
+                                                       i2c_data_in_0
+    -------------------------------------------------  ---------------------------
+    Total                                      4.745ns (1.294ns logic, 3.451ns route)
+                                                       (27.3% logic, 72.7% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point i2c_data_in_6 (SLICE_X15Y24.AX), 126 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     5.211ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_4 (FF)
+  Destination:          i2c_data_in_6 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.732ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.022ns (0.231 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_4 to i2c_data_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X18Y27.AQ      Tcko                  0.408   state<5>
+                                                       state_4
+    SLICE_X12Y23.A1      net (fanout=78)       1.455   state<4>
+    SLICE_X12Y23.A       Tilo                  0.203   state[5]_GND_1_o_equal_18_o
+                                                       state[5]_GND_1_o_equal_19_o<5>1
+    SLICE_X17Y24.C2      net (fanout=12)       1.009   state[5]_GND_1_o_equal_19_o
+    SLICE_X17Y24.C       Tilo                  0.259   i2c_lab<2>
+                                                       Mmux_i2c_data_in_d621
+    SLICE_X15Y24.B4      net (fanout=5)        0.529   Mmux_i2c_data_in_d62
+    SLICE_X15Y24.B       Tilo                  0.259   i2c_data_in<7>
+                                                       Mmux_i2c_data_in_d73
+    SLICE_X15Y24.AX      net (fanout=1)        0.547   i2c_data_in_d<6>
+    SLICE_X15Y24.CLK     Tdick                 0.063   i2c_data_in<7>
+                                                       i2c_data_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      4.732ns (1.192ns logic, 3.540ns route)
+                                                       (25.2% logic, 74.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     5.253ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_3 (FF)
+  Destination:          i2c_data_in_6 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.690ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.022ns (0.231 - 0.253)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_3 to i2c_data_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X16Y27.CQ      Tcko                  0.447   state<3>
+                                                       state_3
+    SLICE_X12Y23.A2      net (fanout=79)       1.374   state<3>
+    SLICE_X12Y23.A       Tilo                  0.203   state[5]_GND_1_o_equal_18_o
+                                                       state[5]_GND_1_o_equal_19_o<5>1
+    SLICE_X17Y24.C2      net (fanout=12)       1.009   state[5]_GND_1_o_equal_19_o
+    SLICE_X17Y24.C       Tilo                  0.259   i2c_lab<2>
+                                                       Mmux_i2c_data_in_d621
+    SLICE_X15Y24.B4      net (fanout=5)        0.529   Mmux_i2c_data_in_d62
+    SLICE_X15Y24.B       Tilo                  0.259   i2c_data_in<7>
+                                                       Mmux_i2c_data_in_d73
+    SLICE_X15Y24.AX      net (fanout=1)        0.547   i2c_data_in_d<6>
+    SLICE_X15Y24.CLK     Tdick                 0.063   i2c_data_in<7>
+                                                       i2c_data_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      4.690ns (1.231ns logic, 3.459ns route)
+                                                       (26.2% logic, 73.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     5.305ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               state_1 (FF)
+  Destination:          i2c_data_in_6 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      4.641ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.019ns (0.231 - 0.250)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: state_1 to i2c_data_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X16Y26.CQ      Tcko                  0.447   state<1>
+                                                       state_1
+    SLICE_X12Y23.A4      net (fanout=79)       1.325   state<1>
+    SLICE_X12Y23.A       Tilo                  0.203   state[5]_GND_1_o_equal_18_o
+                                                       state[5]_GND_1_o_equal_19_o<5>1
+    SLICE_X17Y24.C2      net (fanout=12)       1.009   state[5]_GND_1_o_equal_19_o
+    SLICE_X17Y24.C       Tilo                  0.259   i2c_lab<2>
+                                                       Mmux_i2c_data_in_d621
+    SLICE_X15Y24.B4      net (fanout=5)        0.529   Mmux_i2c_data_in_d62
+    SLICE_X15Y24.B       Tilo                  0.259   i2c_data_in<7>
+                                                       Mmux_i2c_data_in_d73
+    SLICE_X15Y24.AX      net (fanout=1)        0.547   i2c_data_in_d<6>
+    SLICE_X15Y24.CLK     Tdick                 0.063   i2c_data_in<7>
+                                                       i2c_data_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      4.641ns (1.231ns logic, 3.410ns route)
+                                                       (26.5% logic, 73.5% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: NET "clk_BUFGP/IBUFG" PERIOD = 10 ns HIGH 50%;
+--------------------------------------------------------------------------------
+
+Paths for end point i2c/byte_controller/bit_controller/c_state_FSM_FFd14 (SLICE_X18Y11.D6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.418ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               i2c/byte_controller/bit_controller/c_state_FSM_FFd14 (FF)
+  Destination:          i2c/byte_controller/bit_controller/c_state_FSM_FFd14 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.418ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         clk_BUFGP rising at 10.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: i2c/byte_controller/bit_controller/c_state_FSM_FFd14 to i2c/byte_controller/bit_controller/c_state_FSM_FFd14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X18Y11.DQ      Tcko                  0.200   i2c/byte_controller/bit_controller/c_state_FSM_FFd14
+                                                       i2c/byte_controller/bit_controller/c_state_FSM_FFd14
+    SLICE_X18Y11.D6      net (fanout=3)        0.028   i2c/byte_controller/bit_controller/c_state_FSM_FFd14
+    SLICE_X18Y11.CLK     Tah         (-Th)    -0.190   i2c/byte_controller/bit_controller/c_state_FSM_FFd14
+                                                       i2c/byte_controller/bit_controller/c_state_FSM_FFd14-In1
+                                                       i2c/byte_controller/bit_controller/c_state_FSM_FFd14
+    -------------------------------------------------  ---------------------------
+    Total                                      0.418ns (0.390ns logic, 0.028ns route)
+                                                       (93.3% logic, 6.7% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point i2c/byte_controller/bit_controller/cnt_4 (SLICE_X14Y12.D6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.419ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               i2c/byte_controller/bit_controller/cnt_4 (FF)
+  Destination:          i2c/byte_controller/bit_controller/cnt_4 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.419ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         clk_BUFGP rising at 10.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: i2c/byte_controller/bit_controller/cnt_4 to i2c/byte_controller/bit_controller/cnt_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X14Y12.DQ      Tcko                  0.200   i2c/byte_controller/bit_controller/cnt<4>
+                                                       i2c/byte_controller/bit_controller/cnt_4
+    SLICE_X14Y12.D6      net (fanout=3)        0.029   i2c/byte_controller/bit_controller/cnt<4>
+    SLICE_X14Y12.CLK     Tah         (-Th)    -0.190   i2c/byte_controller/bit_controller/cnt<4>
+                                                       i2c/byte_controller/bit_controller/cnt_4_rstpot
+                                                       i2c/byte_controller/bit_controller/cnt_4
+    -------------------------------------------------  ---------------------------
+    Total                                      0.419ns (0.390ns logic, 0.029ns route)
+                                                       (93.1% logic, 6.9% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point i2c/byte_controller/bit_controller/cnt_1 (SLICE_X14Y12.A6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.422ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               i2c/byte_controller/bit_controller/cnt_1 (FF)
+  Destination:          i2c/byte_controller/bit_controller/cnt_1 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.422ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         clk_BUFGP rising at 10.000ns
+  Destination Clock:    clk_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: i2c/byte_controller/bit_controller/cnt_1 to i2c/byte_controller/bit_controller/cnt_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X14Y12.AQ      Tcko                  0.200   i2c/byte_controller/bit_controller/cnt<4>
+                                                       i2c/byte_controller/bit_controller/cnt_1
+    SLICE_X14Y12.A6      net (fanout=3)        0.032   i2c/byte_controller/bit_controller/cnt<1>
+    SLICE_X14Y12.CLK     Tah         (-Th)    -0.190   i2c/byte_controller/bit_controller/cnt<4>
+                                                       i2c/byte_controller/bit_controller/cnt_1_rstpot
+                                                       i2c/byte_controller/bit_controller/cnt_1
+    -------------------------------------------------  ---------------------------
+    Total                                      0.422ns (0.390ns logic, 0.032ns route)
+                                                       (92.4% logic, 7.6% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: NET "clk_BUFGP/IBUFG" PERIOD = 10 ns HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 8.270ns (period - min period limit)
+  Period: 10.000ns
+  Min period limit: 1.730ns (578.035MHz) (Tbcper_I)
+  Physical resource: clk_BUFGP/BUFG/I0
+  Logical resource: clk_BUFGP/BUFG/I0
+  Location pin: BUFGMUX_X3Y13.I0
+  Clock network: clk_BUFGP/IBUFG
+--------------------------------------------------------------------------------
+Slack: 9.570ns (period - min period limit)
+  Period: 10.000ns
+  Min period limit: 0.430ns (2325.581MHz) (Tcp)
+  Physical resource: i2c/byte_controller/bit_controller/cSCL<1>/CLK
+  Logical resource: i2c/byte_controller/bit_controller/cSDA_0/CK
+  Location pin: SLICE_X10Y5.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 9.570ns (period - min period limit)
+  Period: 10.000ns
+  Min period limit: 0.430ns (2325.581MHz) (Tcp)
+  Physical resource: i2c/byte_controller/bit_controller/cSCL<1>/CLK
+  Logical resource: i2c/byte_controller/bit_controller/cSDA_1/CK
+  Location pin: SLICE_X10Y5.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |    5.002|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 4879 paths, 0 nets, and 1942 connections
+
+Design statistics:
+   Minimum period:   5.002ns{1}   (Maximum frequency: 199.920MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Wed Oct 21 20:46:45 2015 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 238 MB
+
+
+

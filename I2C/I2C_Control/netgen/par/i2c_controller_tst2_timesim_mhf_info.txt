@@ -1,0 +1,46 @@
+// Xilinx design hierarchy information file produced by netgen (P.58f) 
+// The information in this file is useful for 
+//   - Design hierarchy relationship between modules 
+//   - Bottom up compilation order (VHDL simulation) 
+//   - SDF file annotation (VHDL simulation) 
+//
+//  Design Name : i2c_controller_tst2
+//
+//  Module      : The name of the hierarchical design module.
+//  Instance    : The instance name used in the parent module.
+//  Design File : The name of the file that contains the module.
+//  SDF File    : The SDF file associated with the module.
+//  SubModule   : The sub module(s) contained within a given module.
+//     Module, Instance : The sub module and instance names.
+
+  Module	: glbl 
+  Instance	: NONE 
+  Design File	: glbl.v 
+  SubModule	: NONE 
+
+  Module      : i2c_master_bit_ctrl
+  Instance    : bit_controller
+  Design File : i2c_master_bit_ctrl_sim.v
+  SDF File    : i2c_master_bit_ctrl_sim.sdf
+  SubModule   : NONE
+
+  Module      : i2c_master_byte_ctrl
+  Instance    : byte_controller
+  Design File : i2c_master_byte_ctrl_sim.v
+  SDF File    : i2c_master_byte_ctrl_sim.sdf
+  SubModule   : i2c_master_bit_ctrl
+       Module : i2c_master_bit_ctrl, Instance : bit_controller
+
+  Module      : i2c_master_top
+  Instance    : i2c
+  Design File : i2c_master_top_sim.v
+  SDF File    : i2c_master_top_sim.sdf
+  SubModule   : i2c_master_byte_ctrl
+       Module : i2c_master_byte_ctrl, Instance : byte_controller
+
+  Module      : i2c_controller_tst2
+  Design File : i2c_controller_tst2_timesim.v
+  SDF File    : i2c_controller_tst2_timesim.sdf
+  SubModule   : i2c_master_top
+       Module : i2c_master_top, Instance : i2c
+

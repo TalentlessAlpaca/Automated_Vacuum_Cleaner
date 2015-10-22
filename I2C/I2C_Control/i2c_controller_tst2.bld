@@ -1,0 +1,43 @@
+Release 14.5 ngdbuild P.58f (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: C:\Xilinx\14.5\ISE_DS\ISE\bin\nt64\unwrapped\ngdbuild.exe
+-intstyle ise -dd _ngo -nt timestamp -uc pinout.ucf -p xc6slx9-csg324-3
+i2c_controller_tst2.ngc i2c_controller_tst2.ngd
+
+Reading NGO file
+"C:/Users/Camilo/Documents/Xilinx_Workspace/I2C_2/i2c_controller_tst2.ngc" ...
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file "pinout.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+INFO:ConstraintSystem - The Period constraint <PERIOD = 100MHz;>
+   [pinout.ucf(13)], is specified using the Net Period method which is not
+   recommended. Please use the Timespec PERIOD method.
+
+WARNING:NgdBuild:1012 - The constraint <PULLUP;> [pinout.ucf(15)] is overridden
+   on the design object rst_n by the constraint <PULLUP;> [pinout.ucf(25)].
+Done...
+
+Checking expanded design ...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   1
+
+Total memory usage is 183376 kilobytes
+
+Writing NGD file "i2c_controller_tst2.ngd" ...
+Total REAL time to NGDBUILD completion:  3 sec
+Total CPU time to NGDBUILD completion:   3 sec
+
+Writing NGDBUILD log file "i2c_controller_tst2.bld"...
