@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    13:07:43 10/10/2015 
+// Create Date:    18:17:21 11/02/2015 
 // Design Name: 
-// Module Name:    Adder_3bit 
+// Module Name:    Adder 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,16 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Adder_3bit(
-    input [2:0] a,
-    input [2:0] b,
-    output [3:0] o
+module Addition(
+    input [32:0] A,
+    input [15:0] B,
+    input reg [32:0] R
     );
 	 
-	 wire[2:0] co;
-	 assign co[0] = 0;
-	 full_Adder_1 lsb(.a(a[0]),.b(b[0]),.c(co[0]),.o(o[0]),.co(co[1]));
-	 full_Adder_1 ibb(.a(a[1]),.b(b[1]),.c(co[1]),.o(o[1]),.co(co[2]));
-	 full_Adder_1 msb(.a(a[2]),.b(b[2]),.c(co[2]),.o(o[2]),.co(o[3]));
+	 always @(*) begin
+		R[32:17] <= A[32:17] + B;
+		R[16:0]	<= A[16:0];
+	 end
 	 
 endmodule
