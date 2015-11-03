@@ -40,6 +40,7 @@ module booth_mult(
 	 rsa rightShift(.clk(clk),.en(sh_en),.shift(shf),.in(add_R),.out(rsa_o));
 	 adder add(.A(accum),.B(add_B),.R(add_R));
 	 // Internal Registers
+	 reg[32:0] accum_d;
 	 reg[3:0] count;
 	 reg[5:0] state;
 	 // Initial Values
@@ -91,6 +92,10 @@ module booth_mult(
 		end
 	 end
 	 
+	 always @(negedge clk) begin
+		accum_d <= accum;
+	 end
+	 
 	 // Combinational
 	 always @(*) begin
 		case(state)
@@ -109,35 +114,36 @@ module booth_mult(
 				case(accum[1:0])
 					0:begin
 						busy 	<= 1;
-						R 		<= R;
+						R 		<= 0;
 						shf	<= 1;
-						accum <= accum;
+						accum <= accum_d;
 						add_B	<= 0;
 					end
 					1:begin
 						busy 	<= 1;
-						R 		<= R;
+						R 		<= 0;
 						shf	<= 1;
-						accum <= accum;
+						accum <= accum_d;
 						add_B	<= B;
 					end
 					2:begin
 						busy 	<= 1;
-						R 		<= R;
+						R 		<= 0;
 						shf	<= 1;
-						accum <= accum;
+						accum <= accum_d;
 						add_B	<= c_B;
 					end
 					3:begin
 						busy 	<= 1;
-						R 		<= R;
+						R 		<= 0;
 						shf	<= 1;
-						accum <= accum;
+						accum <= accum_d;
 						add_B	<= 0;
 					end
 				endcase
 			end
 			SHIFT: begin
+				sh_en <= 0;
 				busy 	<= 1;
 				R 		<= 0;
 				shf	<= 0;
@@ -145,13 +151,15 @@ module booth_mult(
 				add_B	<= 0;
 			end
 			INC: begin
+				sh_en <= 0;
 				busy 	<= 1;
 				R 		<= 0;
 				shf	<= 0;
-				accum <= accum;
+				accum <= accum_d;
 				add_B	<= 0;
 			end
 			default: begin
+				sh_en <= 0;
 				busy 	<= 0;
 				R 		<= 0;
 				shf	<= 0;
