@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    16:53:36 10/10/2015 
+// Create Date:    17:58:36 11/02/2015 
 // Design Name: 
-// Module Name:    RSC 
+// Module Name:    rsa 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,17 +18,23 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module RSC(
-    input [31:0] a,
-	 output lsb_a,
-    output reg [31:0] o
+module rsa(
+    input clk,
+	 input en,
+    input shift,
+    input [32:0] in,
+    output reg [32:0] out
     );
 	 
-	 assign lsb_a = a[0];
+	 initial out <= 0;
 	 
-	 always @(*) begin
-		o 		<= a>>1;
-		o[31] <= a[31];
+	 always @ (negedge clk) begin
+		if(en) begin
+			if(shift) begin
+				out[31:0] <= in >> 1;
+				out[32] <= in[32];
+			end else out <= in;
+		end else out <= out;
 	 end
 	 
 endmodule

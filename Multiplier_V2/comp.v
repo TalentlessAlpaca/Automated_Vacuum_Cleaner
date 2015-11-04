@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:27:26 10/10/2015 
+// Create Date:    18:35:05 11/02/2015 
 // Design Name: 
-// Module Name:    counter_6 
+// Module Name:    comp 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,18 +18,11 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module counter_6(
-    input stim,
-	 input rst,
-    output reg [5:0] count
+module comp(
+    input [15:0] A,
+    output [15:0] C
     );
 	 
-	 always@(posedge stim) begin
-		if(!rst)count <= count + 1;
-	 end
-	 
-	 always@(*) begin
-		if(rst) count <= 0;
-	 end
+	 assign C = (~A)+1'b1;
 	 
 endmodule
