@@ -1,0 +1,21 @@
+ISim log file
+Running: /home/rafa/Descargas/Digital/Integrador/integ_tst_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/rafa/Descargas/Digital/Integrador/integ_tst_isim_beh.wdb 
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+WARNING: File "/home/rafa/Descargas/Digital/Integrador/Integrator.v" Line 27.  For instance uut/Multi/, width 1 of formal port clk is not equal to width 16 of actual signal clk.
+WARNING: File "/home/rafa/Descargas/Digital/Integrador/integ_tst.v" Line 32.  For instance integ_tst/uut/, width 16 of formal port rst is not equal to width 1 of actual variable rst. 
+WARNING: File "/home/rafa/Descargas/Digital/Integrador/integ_tst.v" Line 33.  For instance integ_tst/uut/, width 16 of formal port clk is not equal to width 1 of actual variable clk. 
+WARNING: File "/home/rafa/Descargas/Digital/Integrador/integ_tst.v" Line 34.  For instance integ_tst/uut/, width 16 of formal port enable is not equal to width 1 of actual variable enable. 
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# exit 0
