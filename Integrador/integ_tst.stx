@@ -1,0 +1,73 @@
+Release 14.7 - xst P.20131013 (lin)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/rafa/Descargas/Digital/Integrador/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 0.38 secs
+ 
+--> 
+Parameter xsthdpdir set to /home/rafa/Descargas/Digital/Integrador/xst
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 0.38 secs
+ 
+--> 
+Reading design: integ_tst.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/rafa/Descargas/Digital/Integrador/rsa.v" into library work
+Parsing module <rsa>.
+Analyzing Verilog file "/home/rafa/Descargas/Digital/Integrador/comp.v" into library work
+Parsing module <comp>.
+Analyzing Verilog file "/home/rafa/Descargas/Digital/Integrador/adder.v" into library work
+Parsing module <adder>.
+Analyzing Verilog file "/home/rafa/Descargas/Digital/Integrador/booth_mult.v" into library work
+Parsing module <booth_mult>.
+Analyzing Verilog file "/home/rafa/Descargas/Digital/Integrador/Integrator.v" into library work
+Parsing module <Integrator>.
+WARNING:HDLCompiler:751 - "/home/rafa/Descargas/Digital/Integrador/Integrator.v" Line 40: Redeclaration of ansi port acx is not allowed
+WARNING:HDLCompiler:751 - "/home/rafa/Descargas/Digital/Integrador/Integrator.v" Line 42: Redeclaration of ansi port vx is not allowed
+WARNING:HDLCompiler:751 - "/home/rafa/Descargas/Digital/Integrador/Integrator.v" Line 43: Redeclaration of ansi port bussy is not allowed
+Analyzing Verilog file "/home/rafa/Descargas/Digital/Integrador/integ_tst.v" into library work
+Parsing module <integ_tst>.
+
+
+Total REAL time to Xst completion: 36.00 secs
+Total CPU time to Xst completion: 30.53 secs
+ 
+--> 
+
+
+Total memory usage is 99964 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    3 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+
