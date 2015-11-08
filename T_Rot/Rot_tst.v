@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   21:05:51 11/04/2015
+// Create Date:   19:51:28 11/07/2015
 // Design Name:   TopModuleTransfLineal
-// Module Name:   C:/Users/Camilo/Documents/Xilinx_Workspace/Transflineal/transf_lineal.v
+// Module Name:   C:/Users/Camilo/Documents/Xilinx_Workspace/Transflineal/Rot_tst.v
 // Project Name:  Transflineal
 // Target Device:  
 // Tool versions:  
@@ -22,7 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module transf_lineal;
+module Rot_tst;
 
 	// Inputs
 	reg clk;
@@ -31,13 +31,14 @@ module transf_lineal;
 	reg [15:0] AcX;
 	reg [15:0] AcY;
 	reg [15:0] AcZ;
-	reg Theta;
+	reg [15:0] sdseno;
+	reg [15:0] sdcoseno;
 
 	// Outputs
 	wire [31:0] XAc;
 	wire [31:0] YAc;
 	wire [31:0] ZAc;
-	wire  Busy;
+	wire Busy;
 
 	// Instantiate the Unit Under Test (UUT)
 	TopModuleTransfLineal uut (
@@ -47,7 +48,8 @@ module transf_lineal;
 		.AcX(AcX), 
 		.AcY(AcY), 
 		.AcZ(AcZ), 
-		.Theta(Theta), 
+		.sdseno(sdseno), 
+		.sdcoseno(sdcoseno), 
 		.XAc(XAc), 
 		.YAc(YAc), 
 		.ZAc(ZAc), 
@@ -62,16 +64,18 @@ module transf_lineal;
 		AcX = 1000;
 		AcY = 1000;
 		AcZ = 0;
-		Theta = 45;
+		sdseno = 144;
+		sdcoseno = 8191;
 
 		// Wait 100 ns for global reset to finish
 		#100;
-      #11 rst <= 0;
-		#12 enable <= 1;
+      rst = 0;
+		#10 enable = 1;
 		// Add stimulus here
+
 	end
 	
-	always #5 clk <= !clk;
+	always #5 clk = !clk;
 	
 endmodule
 
