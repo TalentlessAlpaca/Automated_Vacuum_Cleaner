@@ -1,0 +1,35 @@
+
+
+begin module clk_interruptor_0(
+    input clk,
+	input en,
+    input [31:0] limit,
+	input [31:0] count,
+	output reg int_0,
+	);
+	 
+	 reg [31:0] int_Count;
+	 	 	 
+	 always@(negedge clk) begin
+		if(en) begin
+			if(count > int_Count) begin 
+			
+				int_Count <= count + limit; 
+				if (int_Count > limit)begin
+						int_0 <= 1'b1;
+				end
+				else begin
+					int_0 <= 1'b0;
+			end
+			else 
+				int_Count <= int_Count; 
+				clk_0 <= clk_0;		
+			end
+		end
+		else begin
+			int_Count <= count+limit;
+			clk_0 <= 1'b0;
+		end
+	 end
+	 
+end module
