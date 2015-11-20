@@ -51,8 +51,8 @@ module TopModuleTransfLineal(
 	 reg [31:0]mmult3_d; 	// Y*sin
 	 reg [31:0]mmult4_d; 	// Y*cos
 	 
-	 reg [31:0] XA_d;
-	 reg [31:0] YA_d;
+	 (* KEEP = "TRUE" *)reg [31:0] XA_d;
+	 (* KEEP = "TRUE" *)reg [31:0] YA_d;
 	 
 	 reg [5:0]state; 			// 
 	 reg [5:0]nstate; 		// 
@@ -83,16 +83,31 @@ module TopModuleTransfLineal(
 			case (state)
 				reset:begin
 					Busy <= 1;
-					enable1 	<= 0;
-					A 			<= 0;
-					B 			<= 0;
-					XAc 		<= 0;
-					YAc 		<= 0;
+					enable1 		<= 0;
+					A 				<= 0;
+					B 				<= 0;
+					XAc 			<= 0;
+					YAc 			<= 0;
+					mmult 		<= 0; 		
+					mmult2 		<= 0; 
+					mmult3 		<= 0; 		
+					mmult4 		<= 0; 	
+				
 					nstate 	<= Wait;
 				end
 				
 				Wait:begin
-					Busy <= 0;
+					Busy 			<= 0;
+					enable1 		<= 0;
+					A 				<= 0;
+					B 				<= 0;
+					XAc 			<= XA_d;
+					YAc 			<= YA_d;
+					mmult 		<= 0; 		
+					mmult2 		<= 0; 
+					mmult3 		<= 0; 		
+					mmult4 		<= 0; 
+					
 					if (!enable)
 						nstate 	<= Wait;
 					else
@@ -101,12 +116,16 @@ module TopModuleTransfLineal(
 				
 				
 				mult:begin
-					Busy <= 1;
+					Busy 		<= 1;
 					enable1 	<= 1;
 					A 			<= AcX;
 					B 			<= sdseno;
 					XAc 		<= XA_d;
 					YAc 		<= YA_d;
+					mmult 		<= 0; 		
+					mmult2 		<= 0; 
+					mmult3 		<= 0; 		
+					mmult4 		<= 0; 	
 					
 					if (busy1)
 						nstate 	<= Waitmult;
@@ -120,7 +139,12 @@ module TopModuleTransfLineal(
 					A 			<= AcX;
 					B 			<= sdseno;
 					XAc 		<= XA_d;
-					YAc 		<= YA_d;
+					YAc 		<= YA_d;					
+					mmult 		<= 0; 		
+					mmult2 		<= 0; 
+					mmult3 		<= 0; 		
+					mmult4 		<= 0; 	
+					
 					
 					if (!busy1)
 						nstate 	<= rtamult;
@@ -299,14 +323,35 @@ module TopModuleTransfLineal(
 					Busy 		<= 1;
 					XAc 		<= (mmult2+((~mmult3)+1))>>13;//mmult2+((!mmult3)+1);
 					YAc 		<= (mmult + mmult4)>>13; // X >> 13  == X / (2^13)
+					enable1 	<= 0;
+					A 			<= 0;
+					B 			<= 0;
+					mmult		<= mmult_d;
+					mmult2	<= mmult2_d;
+					mmult3	<= mmult3_d;
+					mmult4	<= mmult4_d;
 					nstate 	<= Wait;
+				end
+				
+				default: begin
+					Busy 		<= 1;
+					enable1 	<= 0;
+					A 			<= 0;
+					B 			<= 0;
+					mmult		<= mmult_d;
+					mmult2	<= mmult2_d;
+					mmult3	<= mmult3_d;
+					mmult4	<= mmult4_d;
+					nstate 	<= 0;
+					XAc 		<= 0;
+					YAc 		<= 0;
 				end
 		 endcase
 	end
 
 	
 	always@(negedge clk) begin
-	 mmult_d  <= mmult; 	// Res 1
+	 mmult_d  <= mmult; 		// Res 1
 	 mmult2_d <= mmult2; 	// Res 2
 	 mmult3_d <= mmult3; 	// Res 3
 	 mmult4_d <= mmult4; 	// Res 4
