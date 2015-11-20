@@ -26,7 +26,7 @@ module RAM_Block(
     input W,
     input [31:0] Data_I,
     output reg [31:0] Data_O,
-    output reg [15:0] Ref
+ (* KEEP = "TRUE" *)   output reg [15:0] Ref
     );
 	 
 	 reg [31:0] Mem [255:0];
@@ -37,7 +37,8 @@ module RAM_Block(
 	 end
 	 
 	 always@(negedge clk) begin
-		if(W_ref) Ref[15:0] <= Data_I[15:0];
+		if(W_ref) Ref <= Data_I[15:0];
+		else Ref <= Ref;
 	 end
 	 
 endmodule

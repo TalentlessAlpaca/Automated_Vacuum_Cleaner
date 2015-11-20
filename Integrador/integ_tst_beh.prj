@@ -1,7 +1,0 @@
-verilog work "rsa.v"
-verilog work "comp.v"
-verilog work "adder.v"
-verilog work "booth_mult.v"
-verilog work "Integrator.v"
-verilog work "integ_tst.v"
-verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"
