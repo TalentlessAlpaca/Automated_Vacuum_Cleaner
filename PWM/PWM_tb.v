@@ -5,7 +5,7 @@ module PWM_tb (
     reg [9:0] number ;
     wire pwm ;
 
-    pwm dut (
+    PWM dut (
         .clk ( clk ) ,
         .rst_n ( rst_n ) ,
         .number ( number ) ,
