@@ -4,7 +4,7 @@ module Ultrasonico_tb (
     reg clk , signal , rst_n ;
     wire [15:0] value ;
 
-    ultrasonic dut ( 
+    ultrasonico dut ( 
         .clk ( clk ) , 
         .signal ( signal ) , 
         .rst_n ( rst_n ) , 
