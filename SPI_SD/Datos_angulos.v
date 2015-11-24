@@ -28,6 +28,7 @@ module datos_angulos(
 	reg [9:0] sen [0:360]; 
 	reg [9:0] cos [0:360];
 initial begin
+// los senos y cosenos de los angulos estan multiplicados por 100 para no usar decimales 
 sen	[0]	=	10'b  0  ;
 sen	[1]	=	10'b  1  ;
 sen	[2]	=	10'b  11  ;
