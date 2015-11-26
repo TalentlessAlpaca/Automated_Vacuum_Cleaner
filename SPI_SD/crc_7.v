@@ -1,37 +1,25 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    17:10:04 11/19/2015 
-// Design Name: 
-// Module Name:    crc 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
 //
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
+//	CRC COMPLETO PARA 7 BITS :D (Polinomio), solo requiere modificar localparam
 //
 //////////////////////////////////////////////////////////////////////////////////
 module crc_7( 
 
 	input start,
 	input clk,
-	input [31:0] data_in,
-	output [7:0] data_out,
+	input [datawidth-1:0] data_in,
+	output [crcorder:0] data_out,
 	output done
 	);
+
+	localparam datawidth = 32, crcorder = 7;
 
 	localparam polinomio = 8'b10001001 ;
 	
 	reg rdone;
-	reg [31:0] r_data;
-	reg [7:0] proceso;
+	reg [datawidth-1:0] r_data;
+	reg [crcorder:0] proceso;
 	initial rdone = 1'b0;
 	
 	localparam INIT = 3'd0, GET = 3'd1, COMP = 3'd2, XOR = 3'd3, CORRER = 3'd4, SEND = 3'd5; 
@@ -42,6 +30,8 @@ module crc_7(
 	
 	assign data_out = proceso;
 	assign done = rdone;
+	
+	//Maquina de Estados
 	
 	always @(posedge clk or negedge clk) begin
 		case(state)
@@ -56,16 +46,14 @@ module crc_7(
 			end
 			
 			GET : begin
-				proceso <= r_data[31:31-8];
+				proceso <= r_data[(datawidth-1):(datawidth-1)-(crcorder)];
 				state = COMP;
 			end
 			
 			COMP : begin
 				
-				r_data <= r_data << 1;// CORRER R_DATA
-				
 				cont <= cont + 1'b1;
-				if(proceso[7])
+				if(proceso[crcorder])
 					state = XOR;
 				else
 					state = CORRER;
@@ -77,8 +65,8 @@ module crc_7(
 			end
 			
 			CORRER : begin
-				r_data <= {proceso[7:0], r_data[31-7-1:0], 1'b0};
-				if (cont == 6'd31)
+				r_data <= {proceso[crcorder:0], r_data[(datawidth-1)-crcorder-1:0], 1'b0};
+				if (cont == datawidth)
 					state = SEND;
 				else
 					state = GET;
@@ -93,4 +81,4 @@ module crc_7(
 	end
 
 	
-endmodule
+endmodule 
