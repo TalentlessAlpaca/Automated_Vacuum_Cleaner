@@ -15,9 +15,7 @@ module peripheral_pwm (
 	reg 		rst_n = 0;
 	reg [9:0]	number_1;
 	reg [9:0]	number_2;
-	reg [9:0]	number_3;
-	
-	wire [2:0]	pwm;		//mult_32 output Regs
+	reg [9:0]	number_3;		//mult_32 output Regs
 	
 //------------------------------------ regs and wires-------------------------------
 
