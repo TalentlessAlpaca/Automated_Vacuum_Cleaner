@@ -13,9 +13,9 @@ module peripheral_pwm (clk , rst , d_in , cs , addr , rd , wr, d_out );
 
 	reg [5:0] 	s; 	//selector mux_4  and write registers
 	reg 		rst_n = 0;
-	reg [15:0]	number_1;
-	reg [15:0]	number_2;
-	reg [15:0]	number_3;
+	reg [9:0]	number_1;
+	reg [9:0]	number_2;
+	reg [9:0]	number_3;
 	
 	wire [2:0]	pwm;		//mult_32 output Regs
 	
