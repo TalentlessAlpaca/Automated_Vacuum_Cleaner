@@ -1,4 +1,4 @@
-module peripheral_crc_7(clk , rst , d_in , cs , addr , rd , wr, d_out );
+module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out );
   
 	  input clk;
 	  input rst;
@@ -12,12 +12,13 @@ module peripheral_crc_7(clk , rst , d_in , cs , addr , rd , wr, d_out );
 //------------------------------------ regs and wires-------------------------------
 
 	reg [4:0] s; 	//selector mux_4  and write registers
-	
-	reg [31:0] data_in=0;
+
+	reg [7:0] data_in=0;
 	reg start=0;
 
-	wire [6:0] data_out;
-	wire done;
+	wire [7:0] data_out;
+	wire busy;
+	wire new_data;
 
 
 //------------------------------------ regs and wires-------------------------------
@@ -27,14 +28,12 @@ module peripheral_crc_7(clk , rst , d_in , cs , addr , rd , wr, d_out );
 
 	always @(*) begin//------address_decoder------------------------------
 		case (addr)
-		
-			4'h0:begin s = (cs && wr) ? 5'b00001 : 5'b00000 ;end //data_in[31:16]
-			4'h2:begin s = (cs && wr) ? 5'b00010 : 5'b00000 ;end //data_in[15:0]
-			4'h4:begin s = (cs && wr) ? 5'b00100 : 5'b00000 ;end //start
+			4'h0:begin s = (cs && wr) ? 5'b00001 : 5'b00000 ;end //data_in
+			4'h2:begin s = (cs && wr) ? 5'b00010 : 5'b00000 ;end //start
 
-			4'h6:begin s = (cs && rd) ? 5'b01000 : 5'b00000 ;end //done
-			4'h8:begin s = (cs && rd) ? 5'b10000 : 5'b00000 ;end //data_out
-
+			4'h4:begin s = (cs && wr) ? 5'b00100 : 5'b00000 ;end //data_out
+			4'h6:begin s = (cs && rd) ? 5'b01000 : 5'b00000 ;end //busy
+			4'h8:begin s = (cs && rd) ? 5'b10000 : 5'b00000 ;end //new_data
 			default:begin s = 5'b00000 ; end
 		endcase
 	end//------------------address_decoder--------------------------------
@@ -44,10 +43,8 @@ module peripheral_crc_7(clk , rst , d_in , cs , addr , rd , wr, d_out );
 
 	always @(negedge clk) begin//-------------------- escritura de registros 
 
-		data_in[31:16] = (s[0]) ? d_in : data_in[31:16]; //Write Registers
-		data_in[15:0] = (s[1]) ? d_in : data_in[15:0];
-		start = s[2]; //Write Registers
-	
+		data_in   = (s[0]) ? d_in[7:0] : data_in;	//Write Registers
+		start     =  s[1] ; //Write Registers
 
 	end//------------------------------------------- escritura de registros
 
@@ -55,16 +52,17 @@ module peripheral_crc_7(clk , rst , d_in , cs , addr , rd , wr, d_out );
 
 
 	always @(negedge clk) begin//-----------------------mux_4 :  multiplexa salidas del periferico
-		case (s[4:3])
-			2'b01: d_out[0] = done ;
-			2'b10: d_out[6:0]  = data_out ;
-			default: d_out   = 0 ;
+		case (s[5:3])
+			3'b001: d_out[7:0]  = data_out ;
+			3'b010: d_out[0]    = busy ;
+			3'b100: d_out[0]    = new_data ;
+			default: d_out      = 0 ;
 		endcase
 	end//-----------------------------------------------mux_4
 
 
 
-	crc_7 c_7 ( .clk(clk), .rst(rst), .data_in(data_in), .start(start), .data_out(data_out), .done(done) );
+	spi_master spi_m ( .clk(clk), .rst(rst), .data_in(data_in), .start(start), .data_out(data_out), .busy(busy), .new_data(new_data) );
 
 
 endmodule

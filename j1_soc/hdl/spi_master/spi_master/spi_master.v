@@ -4,19 +4,19 @@
 
 `timescale 1ms / 1ns
 
-module spi_master (
-    input clk,
-    input rst,
-    input miso,
-	 input start,
-    input[7:0] data_in,
-    output mosi,
-    output sck,
-	 output ss,
-    output[7:0] data_out,
-    output busy,
-    output new_data
-  );
+module spi_master (clk, rst, miso, data_in, mosi, sck, ss, data_out, busy, new_data);
+	
+	input clk,
+	input rst;
+	input start;
+	input miso; 
+	input[7:0] data_in;
+	output mosi;
+	output sck;
+	output ss;
+	output[7:0] data_out;
+	output busy;
+	output new_data;
   
   parameter CLK_DIV = 3;		//Clock divisions
    
