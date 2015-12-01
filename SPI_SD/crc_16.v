@@ -4,14 +4,14 @@
 //	CRC COMPLETO PARA 16 BITS :D (Polinomio), solo requiere modificar localparam
 //
 //////////////////////////////////////////////////////////////////////////////////
-module crc_16( 
+module crc_16(clk, rst, start, data_in, dta_out, done);
 
-	input start,
-	input clk,
-	input [datawidth-1:0] data_in,
-	output [crcorder:0] data_out,
-	output done
-	);
+	input clk;
+	input rst;
+	input start;
+	input [datawidth-1:0] data_in;
+	output [crcorder:0] data_out;
+	output done;
 
 	localparam datawidth = 32, crcorder = 16;
 
