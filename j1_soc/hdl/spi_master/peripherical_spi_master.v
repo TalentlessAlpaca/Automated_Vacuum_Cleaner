@@ -52,16 +52,15 @@ module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi 
 	always @(negedge clk) begin//-------------------- escritura de registros 
 
 		data_in   = (s[0]) ? d_in[7:0] : data_in;	//Write Registers
-		start     =  s[1] ; //Write Registers
+		start     =  s[1] ; 								//Write Registers
 
 	end//------------------------------------------- escritura de registros
 
 
 
-
 	always @(negedge clk) begin//-----------------------mux_4 :  multiplexa salidas del periferico
 		case (s[4:2])
-			3'b001: d_out[7:0]  = data_out ;
+			3'b001: d_out[15:0]  = {8'hFF, data_out} ;
 			3'b010: d_out[0]    = busy ;
 			3'b100: d_out[0]    = new_data ;
 			default: d_out      = 0 ;
@@ -70,6 +69,6 @@ module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi 
 
 
 
-	spi_master spi_m (.busy(busy), .clk(clk), .rst(rst), .data_in(data_in), .start(start), .data_out(data_out), .busy(busy), .new_data(new_data), .miso(miso), .mosi(mosi), .sck(sck), .ss(ss));
+	spi_master spi_m (.busy(busy), .clk(clk), .rst(rst), .data_in(data_in), .start(start), .data_out(data_out), .new_data(new_data), .miso(miso), .mosi(mosi), .sck(sck), .ss(ss));
 
 endmodule

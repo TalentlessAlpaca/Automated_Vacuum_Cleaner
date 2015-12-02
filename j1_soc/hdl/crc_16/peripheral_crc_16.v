@@ -16,7 +16,7 @@ module peripheral_crc_16 (clk , rst , d_in , cs , addr , rd , wr, d_out );
 	reg [31:0] data_in=0;
 	reg start=0;
 
-	wire [15:0] data_out;
+	wire [16:0] data_out;
 	wire done;
 //------------------------------------ regs and wires-------------------------------
 
@@ -55,7 +55,7 @@ module peripheral_crc_16 (clk , rst , d_in , cs , addr , rd , wr, d_out );
 	always @(negedge clk) begin//-----------------------mux_4 :  multiplexa salidas del periferico
 		case (s[4:3])
 			2'b01: d_out[0] = done ;
-			2'b10: d_out[6:0]  = data_out ;
+			2'b10: d_out[15:0]  = data_out [15:0] ;
 			default: d_out   = 0 ;
 		endcase
 	end//-----------------------------------------------mux_4

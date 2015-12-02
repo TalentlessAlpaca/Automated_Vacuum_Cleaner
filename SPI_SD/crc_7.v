@@ -18,7 +18,7 @@ module crc_7(start, clk, rst, data_in, data_out, done);
 	localparam polinomio = 8'b10001001 ;
 	
 	reg rdone;
-	reg [datawidth-1:0] r_data;
+	reg [datawidth:0] r_data;
 	reg [crcorder:0] proceso;
 	initial rdone = 1'b0;
 	
@@ -34,60 +34,57 @@ module crc_7(start, clk, rst, data_in, data_out, done);
 	//Maquina de Estados
 	
 	always @(posedge clk or negedge clk) begin
-		case(state)
-		
-			INIT : begin
-				cont <= 6'd0;
-				rdone <= 1'b0; 
-				if (start) begin
-					r_data <= data_in;
-					state = GET;
-				end	
-			end
-			
-			GET : begin
-				proceso <= r_data[(datawidth-1):(datawidth-1)-(crcorder)];
-				state = COMP;
-			end
-			
-			COMP : begin
-				
-				cont <= cont + 1'b1;
-				if(proceso[crcorder])
-					state = XOR;
-				else
-					state = CORRER;
-			end
-			
-			XOR : begin
-				proceso <= proceso ^ polinomio;
-				state = CORRER;
-			end
-			
-			CORRER : begin
-				r_data <= {proceso[crcorder:0], r_data[(datawidth-1)-crcorder-1:0], 1'b0};
-				if (cont == datawidth)
-					state = SEND;
-				else
-					state = GET;
-			end
-			
-			SEND : begin
-				rdone <= 1'b1;
-				state = INIT;
-			end
-			
-		endcase
-	end
-	always @(posedge clk) begin
 		if(rst)begin
 			rdone <= 0;
 			cont <= 0;
 			proceso <= 0;
-			rdone <= 0;
+		end
+		else begin
+			case(state)
+			
+				INIT : begin
+					cont <= 6'd0;
+					rdone <= 1'b0; 
+					if (start) begin
+						r_data <= data_in;
+						state = GET;
+					end	
+				end
+				
+				GET : begin
+					proceso <= r_data[(datawidth-1):(datawidth-1)-(crcorder)];
+					state = COMP;
+				end
+				
+				COMP : begin
+					
+					cont <= cont + 1'b1;
+					if(proceso[crcorder])
+						state = XOR;
+					else
+						state = CORRER;
+				end
+				
+				XOR : begin
+					proceso <= proceso ^ polinomio;
+					state = CORRER;
+				end
+				
+				CORRER : begin
+					r_data <= {proceso[crcorder:0], r_data[(datawidth-1)-crcorder-1:0], 1'b0};
+					if (cont == datawidth)
+						state = SEND;
+					else
+						state = GET;
+				end
+				
+				SEND : begin
+					rdone <= 1'b1;
+					state = INIT;
+				end
+			
+			endcase
 		end
 	end
-	
-
 	
 endmodule 
