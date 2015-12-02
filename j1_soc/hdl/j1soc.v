@@ -3,12 +3,17 @@ module j1soc#(
               parameter   bootram_file     = "../firmware/Hello_World/j1.mem"       // For simulation         
   )(
    uart_tx, ledout,
-   sys_clk_i, sys_rst_i
+   sys_clk_i, sys_rst_i, mosi ,miso, sck, ss
    );
 
    input sys_clk_i, sys_rst_i;
    output uart_tx;
    output ledout;
+
+	input mosi;
+	output miso;
+	output sck;
+	output ss;
 
 
 //------------------------------------ regs and wires-------------------------------
@@ -21,12 +26,15 @@ module j1soc#(
 
 
  
-   reg [1:4]cs;  // CHIP-SELECT
+   reg [1:7]cs;  // CHIP-SELECT
 
    wire			[15:0] mult_dout;  
    wire			[15:0] div_dout;
    wire			uart_dout;	// misma señal que uart_busy from uart.v
    wire			[15:0] dp_ram_dout;
+   wire			[15:0] spi_master_dout;
+   wire			[15:0] crc_7_dout;
+   wire			[15:0] crc_16_dout;
  
 
 //------------------------------------ regs and wires-------------------------------
@@ -44,14 +52,25 @@ module j1soc#(
   dpRAM_interface dpRm(.clk(sys_clk_i), .d_in(j1_io_dout), .cs(cs[4]), .addr(j1_io_addr[7:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(dp_ram_dout));
 
 
+  peripheral_spi_master  per_spi (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[5]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(mult_dout) , .mosi(mosi) ,.miso(miso), .sck(sck), .ss(ss) );
+
+ peripheral_crc_7  per_crc_7 (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[1]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(mult_dout) );
+
+ peripheral_crc_16  per_crc_16 (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[1]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(mult_dout) );
+
+
   // ============== Chip_Select (Addres decoder) ========================  // se hace con los 8 bits mas significativos de j1_io_addr
   always @*
   begin
       case (j1_io_addr[15:8])	// direcciones - chip_select
-        8'h67: cs= 4'b1000; 		//mult
-        8'h68: cs= 4'b0100;		//div
-        8'h69: cs= 4'b0010;		//uart
-        8'h70: cs= 4'b0001;		//dp_ram
+        8'h67: cs= 7'b1000000; 		//mult
+        8'h68: cs= 7'b0100000;		//div
+        8'h69: cs= 7'b0010000;		//uart
+        8'h70: cs= 7'b0001000;		//dp_ram
+        8'h72: cs= 7'b0000100;		//spi
+	8'h74: cs= 7'b0000010;          //crc_7
+	8'h76: cs= 7'b0000001;		//crc_16
+     
         default: cs= 3'b000;
       endcase
   end
@@ -64,10 +83,14 @@ module j1soc#(
   always @*
   begin
       case (cs)
-        4'b1000: j1_io_din = mult_dout; 
-        4'b0100: j1_io_din = div_dout;
-        4'b0010: j1_io_din = uart_dout; 
-        4'b0001: j1_io_din = dp_ram_dout; 
+        7'b1000000: j1_io_din = mult_dout; 
+        7'b0100000: j1_io_din = div_dout;
+        7'b0010000: j1_io_din = uart_dout; 
+        7'b0001000: j1_io_din = dp_ram_dout; 
+        7'b0000100: j1_io_din = spi_master_dout; 
+	7'b0000010: j1_io_din = crc_7_dout;
+	7'b0000001: j1_io_din = crc_16_dout;
+
         default: j1_io_din = 16'h0666;
       endcase
   end

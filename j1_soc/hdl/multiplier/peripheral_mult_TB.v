@@ -87,7 +87,7 @@ module peripheral_mult_TB;
          @ (posedge clk);
        end
 
-	d_in = 16'd0000;	//recivo dato
+	d_in = 16'd0000;	//recibo dato
 	addr = 16'h0002;
 	cs=0; rd=1; wr=0;
 

@@ -99,7 +99,7 @@ module spi_master_peripheral_testbench;
 	   #10;		
 			rst = 0;
 		#10
-			wr = 1;
+			wr = 1; 
 			addr = 4'h0;
 			d_in[7:0] = 8'b10111001;
 		#10

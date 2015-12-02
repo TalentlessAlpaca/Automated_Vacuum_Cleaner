@@ -19,10 +19,12 @@ DIV		= divider
 DIV_16		= divider/div_16
 UART		= uart
 dp_RAM		= dpRAM
+SPI		= spi_master
+CRC_7		= crc_7
+CRC_16		= crc_16
 
 
-SRC             = $(DESIGN).v j1.v dpram.v $(UART)/uart.v $(UART)/peripheral_uart.v $(MULT)/peripheral_mult.v  $(MULT_32)/acc.v  $(MULT_32)/comp.v  $(MULT_32)/control_mult.v  $(MULT_32)/lsr.v  $(MULT_32)/rsr.v  $(MULT_32)/mult_32.v $(DIV)/peripheral_div.v $(DIV_16)/control_div.v $(DIV_16)/counter_div.v $(DIV_16)/div_16.v $(DIV_16)/final_result.v $(DIV_16)/lsr_div.v $(DIV_16)/subtractor.v $(dp_RAM)/core_peripheric.v $(dp_RAM)/dualport_RAM.v $(dp_RAM)/dpRAM_interface.v
-
+SRC             = $(DESIGN).v j1.v dpram.v $(UART)/uart.v $(UART)/peripheral_uart.v $(MULT)/peripheral_mult.v  $(MULT_32)/acc.v  $(MULT_32)/comp.v  $(MULT_32)/control_mult.v  $(MULT_32)/lsr.v  $(MULT_32)/rsr.v  $(MULT_32)/mult_32.v $(DIV)/peripheral_div.v $(DIV_16)/control_div.v $(DIV_16)/counter_div.v $(DIV_16)/div_16.v $(DIV_16)/final_result.v $(DIV_16)/lsr_div.v $(DIV_16)/subtractor.v $(dp_RAM)/core_peripheric.v $(dp_RAM)/dualport_RAM.v $(dp_RAM)/dpRAM_interface.v $(SPI)/peripherical_spi_master.v $(SPI)/spi_master.v $(CRC_7)/peripheral_crc_7.v $(CRC_7)/crc_7.v $(CRC_16)/peripheral_crc_16.v $(CRC_16)/crc_16.v 
 SIM_SRC = $(DESIGN)_TB.v          \
 
  
