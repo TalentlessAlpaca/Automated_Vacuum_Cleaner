@@ -3,12 +3,11 @@
 //
 //	CRC COMPLETO PARA 16 BITS :D (Polinomio), solo requiere modificar localparam
 //
-//////////////////////////////////////////////////////////////////////////////////
-module crc_16(clk, rst, start, data_in, dta_out, done);
+module crc_16(start, clk, rst, data_in, data_out, done);
 
+	input start;
 	input clk;
 	input rst;
-	input start;
 	input [datawidth-1:0] data_in;
 	output [crcorder:0] data_out;
 	output done;
@@ -79,6 +78,13 @@ module crc_16(clk, rst, start, data_in, dta_out, done);
 			
 		endcase
 	end
-
+	always @(posedge clk) begin
+		if(rst)begin
+			rdone <= 0;
+			cont <= 0;
+			proceso <= 0;
+			rdone <= 0;
+		end
+	end
 	
 endmodule 

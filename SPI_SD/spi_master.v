@@ -4,9 +4,9 @@
 
 `timescale 1ms / 1ns
 
-module spi_master (clk, rst, miso, data_in, mosi, sck, ss, data_out, busy, new_data);
+module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy, new_data);
 	
-	input clk,
+	input clk;
 	input rst;
 	input start;
 	input miso; 

@@ -4,16 +4,14 @@
 //	CRC COMPLETO PARA 7 BITS :D (Polinomio), solo requiere modificar localparam
 //
 //////////////////////////////////////////////////////////////////////////////////
-module crc_7(clk, rst, start, data_in, data_out, done);
+module crc_7(start, clk, rst, data_in, data_out, done);
 
- 	input clk;
-	input rst;
-	
 	input start;
+	input clk;
+	input rst;
 	input [datawidth-1:0] data_in;
 	output [crcorder:0] data_out;
 	output done;
-	
 
 	localparam datawidth = 32, crcorder = 7;
 
@@ -81,6 +79,15 @@ module crc_7(clk, rst, start, data_in, data_out, done);
 			
 		endcase
 	end
+	always @(posedge clk) begin
+		if(rst)begin
+			rdone <= 0;
+			cont <= 0;
+			proceso <= 0;
+			rdone <= 0;
+		end
+	end
+	
 
 	
 endmodule 
