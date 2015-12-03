@@ -36,7 +36,7 @@ module crc_7(start, clk, rst, data_in, data_out, done);
 	
 	reg[6:0] cont; // contador de corrimientos
 	
-	assign data_out = proceso; //se asigna la salida de crc
+	assign data_out = proceso; //se asigna proceso a la salida de crc (dout)
 	assign done = rdone; // se asigna done a la salida
 	
 		
@@ -48,6 +48,7 @@ module crc_7(start, clk, rst, data_in, data_out, done);
 			rdone <= 0; 
 			cont <= 0;
 			proceso <= 0;
+			state = INIT;
 		end	
 			
 		else begin	

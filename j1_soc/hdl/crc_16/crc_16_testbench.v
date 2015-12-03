@@ -36,8 +36,8 @@ module crc_16_testbench;
 	
 	//parameters clk
 	parameter PERIOD          = 10;
-   parameter real DUTY_CYCLE = 0.5;
-   parameter OFFSET          = 0;
+   	parameter real DUTY_CYCLE = 0.5;
+  	 parameter OFFSET          = 0;
 
 	// Instantiate the Unit Under Test (UUT)
 	crc_16 uut (

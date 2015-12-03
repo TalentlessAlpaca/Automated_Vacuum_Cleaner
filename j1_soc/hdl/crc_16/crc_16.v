@@ -46,7 +46,7 @@ module crc_16(start, clk, rst, data_in, data_out, done);
 			rdone <= 0;
 			cont <= 0;
 			proceso <= 0;
-			rdone <= 0;
+			state = INIT;
 		end
 
 		else begin 

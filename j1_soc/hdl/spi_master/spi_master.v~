@@ -65,31 +65,25 @@ module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy
 		  state_d = WAIT_HALF;     // change state	- cambio de estado 
 		end
 	      end
-	      WAIT_HALF: begin		   	       // estado WAIT_HALF (preparar el esclavo) "se selecciona el esclavo"
-		sck_d = sck_q + 1'b1;                  // increment clock counter  - se incrementa el contador de reloj
-		if (sck_q == {CLK_DIV-1{1'b1}}) begin  // if clock is half full (about to fall) - espera a que el reloj
-						       // del esclavo este medio lleno
-		  sck_d = 1'b0;                        // reset to 0 
-		  state_d = TRANSFER;                  // change state -  cambio de estado
+	      WAIT_HALF: begin		   	       // estado WAIT_HALF
+		sck_d = sck_q + 1'b1;                  // increment clock counter
+		if (sck_q == {CLK_DIV-1{1'b1}}) begin  // if clock is half full (about to fall)
+		  sck_d = 1'b0;                        // reset to 0
+		  state_d = TRANSFER;                  // change state
 		end
 	      end
-	      TRANSFER: begin				//estado de transferencia
-		sck_d = sck_q + 1'b1;                           // increment clock counter - se incrementa el contador del reloj
-		if (sck_q == 4'b0000) begin                     // if clock counter is 0 - si contador de reloj es 0
-		  mosi_d = data_q[7];                           // output the MSB of data - se coloca en mosi el bit mas significativo 
-		end 
-		else if (sck_q == {CLK_DIV-1{1'b1}}) begin  // else if it's half full (about to fall) -  si contador de reloj esta 
-								//medio lleno ---> recibe :D
-								// cambiar -1 para cambiar fase 
-		  data_d = {data_q[6:0], miso};                 // read in data (shift in) - leer miso e insertar al reg por corrimiento  
-		end 
-		else if (sck_q == {CLK_DIV{1'b1}}) begin    // else if it's full (about to rise) - si esta lleno el contador de reloj
-								// cambiar -1 para cambiar fase 
-		  ctr_d = ctr_q + 1'b1;                         // increment bit counter - incrementa contador de transferencia
-		  if (ctr_q == 3'b111) begin                    // if we are on the last bit - verifica si ya se lleno contador de reloj
-		    state_d = IDLE;                             // change state - cambio de esado a reposo
-		    data_out_d = data_q;                        // output data	- se envia coloca el dato en data_out_d
-		    new_data_d = 1'b1;                          // signal data is valid - newdata(avail - done) en 1
+	      TRANSFER: begin
+		sck_d = sck_q + 1'b1;                           // increment clock counter
+		if (sck_q == 4'b0000) begin                     // if clock counter is 0
+		  mosi_d = data_q[7];                           // output the MSB of data
+		end else if (sck_q == {CLK_DIV-1{1'b1}}) begin  // else if it's half full (about to fall)
+		  data_d = {data_q[6:0], miso};                 // read in data (shift in)
+		end else if (sck_q == {CLK_DIV{1'b1}}) begin    // else if it's full (about to rise)
+		  ctr_d = ctr_q + 1'b1;                         // increment bit counter
+		  if (ctr_q == 3'b111) begin                    // if we are on the last bit
+		    state_d = IDLE;                             // change state
+		    data_out_d = data_q;                        // output data
+		    new_data_d = 1'b1;                          // signal data is valid
 		  end
 		end
 	      end
