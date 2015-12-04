@@ -1,5 +1,6 @@
 module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi ,miso, sck, ss);
   
+	//entradas y salidas j1
 	  input clk;
 	  input rst;
 	  input [15:0]d_in;
@@ -15,6 +16,8 @@ module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi 
 
 //------------------------------------ regs and wires-------------------------------
 
+	//registros modulo peripheral 
+
 	reg [4:0] s; 	//selector mux_4  and write registers
 
 	reg [7:0] data_in=0;
@@ -23,6 +26,9 @@ module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi 
 	wire [7:0] data_out;
 	wire busy;
 	wire new_data;
+
+	//salidas fisicas
+
 	wire mosi;
 	wire miso;
 	wire sck;
@@ -36,9 +42,12 @@ module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi 
 
 	always @(*) begin//------address_decoder------------------------------
 		case (addr)
+		   //se asignan direcciones 
+			//direcciones de escritura
 			4'h0:begin s = (cs && wr) ? 5'b00001 : 5'b00000 ;end //dMOSI
 			4'h2:begin s = (cs && wr) ? 5'b00010 : 5'b00000 ;end //start
 
+			//direcciones de lectura
 			4'h4:begin s = (cs && rd) ? 5'b00100 : 5'b00000 ;end //dMISO
 			4'h6:begin s = (cs && rd) ? 5'b01000 : 5'b00000 ;end //busy
 			4'h8:begin s = (cs && rd) ? 5'b10000 : 5'b00000 ;end //avail
@@ -70,6 +79,6 @@ module peripheral_spi_master(clk , rst , d_in , cs , addr , rd , wr, d_out,mosi 
 
 
 
-	spi_master spi_m (.clk(clk), .rst(rst), .data_in(data_in), .start(start), .data_out(data_out), .busy(busy), .new_data(new_data), .miso(miso), .mosi(mosi), .sck(sck), .ss(ss));
+	spi_master spi_m (.clk(clk), .rst(rst), .data_in(data_in), .start(start), .data_out(data_out), .busy(busy), .new_data(new_data), .miso(miso), .mosi(mosi), .sck(sck), .ss(ss));  // se instancia modulo crc16
 
 endmodule

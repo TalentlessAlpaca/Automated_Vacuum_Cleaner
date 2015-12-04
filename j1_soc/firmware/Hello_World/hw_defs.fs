@@ -28,20 +28,22 @@ h# 6904 constant led     \ led-independiente , se lo deja dentro del mapa de mem
 
 
 \ memory map SPI:
-h# 7200 constant spi_mosi		
+\ se definen las direcciones de memoria de SPI	
+h# 7200 constant spi_mosi
 h# 7202 constant spi_start
 h# 7204 constant spi_miso
 h# 7206 constant spi_busy
 h# 7208 constant spi_avail
 
 \ memory map CRC_7:
-h# 7400 constant crc_7_data_in_high		
-h# 7402 constant crc_7_data_in_low
-h# 7404 constant crc_7_start
-h# 7406 constant crc_7_done
-h# 7408 constant crc_7_data_out
+\ se definen las direcciones de memoria de CRC_7
+h# 7400 constant crc_7_data_in		
+h# 7402 constant crc_7_start
+h# 7404 constant crc_7_done
+h# 7406 constant crc_7_data_out
 
 \ memory map CRC_16:
+\ se definen las direcciones de memoria de CRC_16
 h# 7600 constant crc_16_data_in_high		
 h# 7602 constant crc_16_data_in_low
 h# 7604 constant crc_16_start
