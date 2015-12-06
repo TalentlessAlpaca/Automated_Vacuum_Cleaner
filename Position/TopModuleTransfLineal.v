@@ -73,7 +73,8 @@ module TopModuleTransfLineal(
 					mult4			= 14,
 					Waitmult4	= 15,
 					rtamult4		= 16,
-					suma			= 17;
+					suma			= 17,
+					sum_shf		= 18;
 
 	 booth_mult multi(.clk(clk),.rst(rst),.en(enable1),.A(A),.B(B),.R(answer),.busy(busy1));
 	 
@@ -321,8 +322,39 @@ module TopModuleTransfLineal(
 				
 				suma:begin
 					Busy 		<= 1;
-					XAc 		<= (mmult2+((~mmult3)+1))>>13;//mmult2+((!mmult3)+1);
-					YAc 		<= (mmult + mmult4)>>13; // X >> 13  == X / (2^13)
+					XAc 		<= (mmult2+((~mmult3)+1));//mmult2+((!mmult3)+1);
+					YAc 		<= (mmult + mmult4); // X >> 13  == X / (2^13)
+					enable1 	<= 0;
+					A 			<= 0;
+					B 			<= 0;
+					mmult		<= mmult_d;
+					mmult2	<= mmult2_d;
+					mmult3	<= mmult3_d;
+					mmult4	<= mmult4_d;
+					nstate 	<= sum_shf;
+				end
+				
+				sum_shf:begin
+					Busy 		<= 1;
+					
+					if(XA_d[31]) begin
+						if(clk)	XAc <= 32'hfff80000 | (XA_d >> 13);
+						else XAc <= XA_d;
+					end
+					else begin
+						if(clk)	XAc <= XA_d >> 13;
+						else XAc <= XA_d;
+					end
+					
+					if(YA_d[31]) begin
+						if(clk)	YAc <= 32'hfff80000 | (YA_d >> 13);
+						else YAc <= YA_d;
+					end
+					else begin
+						if(clk)	YAc <= YA_d >> 13;
+						else YAc <= YA_d;
+					end
+					
 					enable1 	<= 0;
 					A 			<= 0;
 					B 			<= 0;

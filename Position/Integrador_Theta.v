@@ -18,43 +18,61 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Integradorv2(
+module Integrador_theta(
     input [15:0] a,
     input [15:0] dt,
     input enable,
     input rst,
     input clk,
-    output reg [31:0] v,
+    output [31:0] v,
     output reg busy
     );
 	 	
-	 wire ready;
+	 wire busy_mul;
 	 reg en;
-	 reg [31:0] pv;
-	 reg [31:0] vd;
-	 reg [31:0] pvd;
-	 reg [31:0] varI;
+	 reg [63:0] acum;
+	 reg [63:0] acum_d;
 	 wire [31:0] varS;
 	 reg rest;
-	 initial rest <= 1'b1;
-	 initial v = 32'h0000;
-	 booth_mult Multi(.clk(clk),.rst(rest), .en(en),.A(dt),.B(varI),.busy(ready),.R(varS));
+	 
+	 assign v = acum[63:32];
+	 
+	booth_mult Multi(
+		.clk(clk),
+		.rst(rest),
+		.en(en),
+		.A(dt),
+		.B(a),
+		.busy(busy_mul),
+		.R(varS)
+	);
 	 
 	 reg div1_rst;
 	 reg div_en;
-	 reg div_busy;
 	 reg [63:0] div_A;
 	 localparam div_B = 64'd100000000;
-	 reg [63:0] div_res;
-	 div_64 instance_name (
+	 wire div_busy;
+	 wire [63:0] div_res;
+	 
+	 div_64 divider (
 		.clk(clk), 
 		.rst(div1_rst), 
 		.init_in(div_en), 
-		.A(div_A), 
+		.A({div_A,32'h00000000}), 
 		.B(div_B), 
 		.Result(div_res), 
 		.busy(div_busy)
      );
+	 
+	 
+	 initial begin
+		rest 	= 1'b1;
+		div1_rst = 1'b1;
+		acum = 64'd0;
+		acum_d = 64'd0;
+		div_A = 64'd0;
+	 end
+	 
 	//--------------------------------Modulo states
 	
 	 
@@ -62,11 +80,11 @@ module Integradorv2(
 	 	 localparam 
 					reset 		= 5'd0,
 					ini	  		= 5'd1,
-					mulv		= 5'd2,
+					mulv			= 5'd2,
 					check_1  	= 5'd3,
-					afterv		= 5'd4,
-					div_1		= 5'd5,
-					check_2		= 5'd6,
+					div_1			= 5'd4,
+					check_2		= 5'd5,
+					afterv		= 5'd6,
 					end_state	= 5'd7;
 						
 	 // State Machine Regs
@@ -79,99 +97,123 @@ module Integradorv2(
 	 
 	 
 	 always @(posedge clk)begin
-	  if(rst) state <= reset;
-	  else state <= next_state;  
+		if(rst) state <= reset;
+		else state <= next_state;
 	 end
 	
 	always @(*)begin
 		case(state)
 			reset: begin
-				 v  <= 32'd0;
-				 pv <= 32'd0;
-				 busy <= 1'd1;
-				 en <= 1'd0;
-				 varI <= 32'd0;
-				 rest <= 1'd1;
-				 next_state <= ini;
+				acum 			<= 32'd0;
+				busy 			<= 1'd1;
+				en 			<= 1'd0;
+				rest 			<= 1'd1;
+				div_A			<= 64'd0;
+				div1_rst		<= 1'b1;
+				div_en		<= 1'b0;
+				
+				next_state 	<= ini;
 			end
 			
 			ini: begin
-				 busy <= 1'd0;
-				 v  <= vd;
-				 pv <= pvd;
-				 en <= 1'd0;
-				 varI <= 1'd0;
-				 rest <= 1'd1;
-				if (!enable) next_state <= ini;
-					else 		next_state <= mulv;
+				busy 			<= 1'd0;
+				acum 			<= acum_d;
+				en 			<= 1'd0;
+				rest 			<= 1'd0;
+				div_A			<= 64'd0;
+				div1_rst		<= 1'b0;
+				div_en		<= 1'b0;
+				
+				if (enable) next_state <= mulv;
+				else 		next_state <= ini;
 			
 			end
 			
 			mulv: begin
-				 v  <= vd;
-				 pv <= pvd;
-			  	 busy <= 1'd1;
-				 en <= 1'b1;
-				 rest <=1'b0;
-				 varI <= a;
-				 next_state <= check_1;
+				acum 			<= acum_d;
+			  	busy 			<= 1'd1;
+				en 			<= 1'b1;
+				rest 			<= 1'b0;
+				div_A			<= 64'd0;
+				div1_rst		<= 1'b0;
+				div_en		<= 1'b0;
+				
+				if(busy_mul)	next_state <= check_1;
+				else 			next_state <= mulv;
 			end
 			
 			check_1: begin
-				 v  <= vd;
-			  	 busy <= 1'd1;
-				 en <= 1'b0;
-				 rest <= 1'b0;
-				 varI <= a;
-			
-				if (!ready) begin
-					next_state <= afterv;
-					pv <= v + varS;
-				end
-					else begin
-					pv <= pvd;
-					next_state <= check_1;
-					end
+				acum 		<= acum_d;
+			  	busy 		<= 1'd1;
+				en 			<= 1'b0;
+				rest 		<= 1'b0;
+				div_A			<= 64'd0;
+				div1_rst	<= 1'b0;
+				div_en		<= 1'b0;
+				
+				if (busy_mul) 	next_state <= check_1;
+				else 			next_state <= div_1;
 					
 			end
 			
-			afterv: begin
-				v  <= vd;
-				pv <= pvd;
+			div_1: begin
 				busy <= 1'd1;
-				varI <= a;
+				en <= 1'b0;
+				rest <= 1'b0;
+				if(varS[31]) 	div_A <= (~varS)+1;
+				else				div_A <= varS;
+				div1_rst	<= 1'b0;
+				div_en		<= 1'b1;
+				
+				if(div_busy) next_state <= check_2;
+				else next_state <= div_1;
+			end
+			
+			check_2: begin
+				busy <= 1'd1;
+				en <= 1'b0;
+				rest <= 1'b0;
+				
+				div1_rst	<= 1'b0;
+				div_en		<= 1'b1;
+				
+				if(div_busy) next_state <= check_2;
+				else next_state <= afterv;
+			end
+			
+			afterv: begin
+				if(clk) 	begin
+					//if (varS == 0)		acum <= acum_d;
+					if(varS[31]) acum <= acum_d + 1 + ~div_res;
+					else					acum <= acum_d + div_res;
+				end
+				else 		acum <= acum_d;
+				busy <= 1'd1;
 				rest <= 1'b1;
 				en <= 1'd0;
-				next_state <= end_state;
-				
+				next_state <= ini;
 			end
-			
+			/*
 			end_state: begin
-				 pv <= pvd;
-				 en <= 1'd0;
-				 rest <=1'b1;
-				 varI <= a;
-				 v <= pv;
-				 busy <= 1'd0;
-					if (!enable) next_state <= end_state;
-					else 		next_state <= ini;
+				en <= 1'd0;
+				rest <=1'b1;
+				busy <= 1'd0;
+				if (!enable) next_state <= end_state;
+				else 		next_state <= ini;
 			end
-			
+			*/
 			default: begin
-				 pv <= pvd;
-				 en <= 1'd0;
-				 rest <= 1'b1;
-				 varI <= a;
-				 v <= vd;
-				 busy <= 1'd0;
-				 next_state <= ini;
+				acum <= acum_d;
+				en <= 1'd0;
+				rest <= 1'b1;
+				busy <= 1'd0;
+				next_state <= ini;
 			end
 		endcase
 	 end
 	 
 	always @(negedge clk)begin
-	pvd <= pv;
-	vd <= v;
+		acum_d <= acum;
 	end
 
 endmodule

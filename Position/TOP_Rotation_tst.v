@@ -81,7 +81,7 @@ module TOP_Rotation_tst;
 		W_ref = 0;
 		W = 0;
 		Data_I = 0;
-		ssin = 16'd142;
+		ssin = -16'd138;
 		ccos = 16'd8191;
 		i = 0;
 
@@ -89,6 +89,7 @@ module TOP_Rotation_tst;
 		#100;
 		// Add stimulus here
 		// Load RAM Values
+		/*
 		for(i = 0; i <= 255; i = i+1) begin
 			ssin = ssin+1;
 			if(i == 13) 		begin ccos = 16'd8190; end
@@ -112,18 +113,45 @@ module TOP_Rotation_tst;
 		W_ref = 1;
 		#20;
 		W_ref = 0;
+		*/
+		
+		for(i = 0; i <= 255; i = i+1) begin
+			ssin = ssin+1;
+			if(i == 0) 			begin ccos = 16'd8191; end
+			else if(i == 45) 	begin ccos = 16'd8192; end
+			else					begin ccos = ccos; end
+			#3 Address_w = i[7:0];
+			#20 Data_I = {ssin,ccos};
+			#20 W = 1;
+			#20 W = 0;
+		end
+		Data_I = 32'd0;
+		#10;
+		W_ref = 1;
+		#20;
+		W_ref = 0;
+		
 		// Perform Transformations
 		rst = 0;
 		#100;
 		enable = 0;
 		i = 0;
+		#100;
+		theta = -1;
+		AcX = -1;
+		AcY = -1;
 		#10;
 		enable = 1;
+		while(!busy) #10;
+		while(busy) #10;
+		enable = 0;
+		/*
 		for(i = 0; i <= 255; i = i+1) begin
 			theta = theta+1;
 			while(!busy) #1;
 			while(busy) #1;
 		end
+		*/
 	end
 	
 	always #5 clk = ~clk;

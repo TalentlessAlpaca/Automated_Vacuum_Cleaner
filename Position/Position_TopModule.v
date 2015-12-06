@@ -115,7 +115,7 @@ module position_topModule(
 		.SDA_out(SDA_out)
 	 );
 	 
-	 Integradorv2 ttheta(
+	 Integrador_theta ttheta(
 		.clk(clk),
 		.rst(theta_integ_rst),
 		.enable(theta_integ_en),
