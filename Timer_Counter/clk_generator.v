@@ -21,9 +21,11 @@
 module clk_generator(
     input clk,
     input en,
+	 input rst,
     input [31:0] limit,
     input [31:0] count,
-    output reg clk_0
+    output reg clk_0,
+	 output reg done
     );
 
 	 reg [31:0] ndCount;

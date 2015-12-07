@@ -21,9 +21,11 @@
 module clk_interruptor(
     input clk,
     input en,
+	 input rst,
     input [31:0] limit,
     input [31:0] count,
-    output reg int_0
+    output reg int_0,
+	 output done
     );
 
 	 reg [31:0] int_Count;
