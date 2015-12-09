@@ -52,3 +52,15 @@ h# 7606 constant crc_16_done
 h# 7608 constant crc_16_data_out
 
 
+\ constantes 
+
+\ constantes memoria 
+
+b# 00000011 constant cmd_read 
+b# 00000010 constant cmd_write  
+b# 00000001 constant cmd_write_status
+
+b# 00000001 constant byte_status
+b# 10000001 constant page_status
+b# 01000001 constant cont_status
+ 

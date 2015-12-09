@@ -39,10 +39,10 @@ module spi_master_testbench;
 	wire busy;
 	wire new_data;
 	
-	//parameters clk
+	//parameters
 	parameter PERIOD          = 10;
-   	parameter real DUTY_CYCLE = 0.5;
-   	parameter OFFSET          = 0;
+   parameter real DUTY_CYCLE = 0.5;
+   parameter OFFSET          = 0;
 
 	// Instantiate the Unit Under Test (UUT)
 	spi_master uut (
@@ -68,8 +68,7 @@ module spi_master_testbench;
 		data_in = 0;
 			
 	#OFFSET
-	//clk
-        forever
+     forever
 			begin
 				clk = 1'b1;
 				#(PERIOD-(PERIOD*DUTY_CYCLE)) clk = 1'b0;
@@ -79,7 +78,6 @@ module spi_master_testbench;
 	
 	initial begin
 	#OFFSET
-	//se simula entrada miso como un reloj de mayor tamaño 
 		forever
 			begin
 				miso = 1'b1;
@@ -91,14 +89,14 @@ module spi_master_testbench;
 	initial begin
 	
 		// Wait 10 ns for global reset to finish
-		#10;
+		#50;
 			rst=0;
 			start=1;
-			data_in=01011100; //dMOSI
+			data_in=01011100;
 		#10
 			start=0;
 		@(*)begin
-			if (new_data) begin //avail
+			if (new_data)begin
 				#20
 					rst=1;
 				#10
@@ -108,4 +106,5 @@ module spi_master_testbench;
 	end
       
 endmodule
+
 

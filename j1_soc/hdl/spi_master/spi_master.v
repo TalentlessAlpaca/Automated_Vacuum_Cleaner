@@ -22,7 +22,7 @@ module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy
 
 	//parametros  
 	  
-	 parameter CLK_DIV = 3;		//Clock divisions (periodo clk*2³) 
+	  parameter CLK_DIV = 3;		//Clock divisions (periodo clk*2³) 
 	   
 	  localparam STATE_SIZE = 2;            // cantidad de estados 2²
 	  localparam IDLE = 2'd0,   WAIT_HALF = 2'd1,   TRANSFER = 2'd2;	//estados
@@ -45,16 +45,19 @@ module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy
 	  assign data_out = data_out_q;					//asignar a data_out ---> dataout_q
 	  assign new_data = new_data_q;					//asigna a new_data  ---> new_data_q
 	   
+		always @(*) begin
+			 sck_d = sck_q;		//asignar registros actuales a registro proximo
+			 data_d = data_q;		//asignar registros actuales a registro proximo
+			 mosi_d = mosi_q;		//asignar registros actuales a registro proximo
+			 ctr_d = ctr_q;		//asignar registros actuales a registro proximo
+			 new_data_d = 1'b0;		//new data es 0 hasta haber terminado
+			 data_out_d = data_out_q;	//asignar registros actuales a registro proximo
+			 state_d = state_q;		//asignar registros actuales a registro proximo
+	//	end
+		
 	//bloque combinacional
 
-	  always @(*) begin
-	    sck_d = sck_q;		//asignar registros actuales a registro proximo
-	    data_d = data_q;		//asignar registros actuales a registro proximo
-	    mosi_d = mosi_q;		//asignar registros actuales a registro proximo
-	    ctr_d = ctr_q;		//asignar registros actuales a registro proximo
-	    new_data_d = 1'b0;		//new data es 0 hasta haber terminado
-	    data_out_d = data_out_q;	//asignar registros actuales a registro proximo
-	    state_d = state_q;		//asignar registros actuales a registro proximo
+	  //always @(negedge clk) begin
 	     
 	    case (state_q)
 	      IDLE: begin		   //estado IDLE (reposo)
@@ -121,4 +124,4 @@ module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy
 		    end
 	  end
 	   
-endmodule
+endmodule 

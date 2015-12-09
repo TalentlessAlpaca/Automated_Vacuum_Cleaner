@@ -22,7 +22,7 @@ module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy
 
 	//parametros  
 	  
-	| parameter CLK_DIV = 3;		//Clock divisions (periodo clk*2³) 
+	 parameter CLK_DIV = 3;		//Clock divisions (periodo clk*2³) 
 	   
 	  localparam STATE_SIZE = 2;            // cantidad de estados 2²
 	  localparam IDLE = 2'd0,   WAIT_HALF = 2'd1,   TRANSFER = 2'd2;	//estados
