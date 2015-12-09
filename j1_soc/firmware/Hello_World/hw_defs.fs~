@@ -32,6 +32,7 @@ h# 6904 constant led     \ led-independiente , se lo deja dentro del mapa de mem
 h# 7200 constant spi_mosi
 h# 7202 constant spi_start
 h# 7204 constant spi_reset
+h# 7206 constant spi_ss
 h# 7206 constant spi_miso
 h# 7208 constant spi_busy
 h# 720A constant spi_avail
@@ -60,7 +61,7 @@ b# 00000011 constant cmd_read
 b# 00000010 constant cmd_write  
 b# 00000001 constant cmd_write_status
 
-b# 11111111 constant byte_status
-b# 11111111 constant page_status
-b# 11111111 constant cont_status
+b# 00000001 constant byte_status
+b# 10000001 constant page_status
+b# 01000001 constant cont_status
  

@@ -32,9 +32,10 @@ h# 6904 constant led     \ led-independiente , se lo deja dentro del mapa de mem
 h# 7200 constant spi_mosi
 h# 7202 constant spi_start
 h# 7204 constant spi_reset
-h# 7206 constant spi_miso
-h# 7208 constant spi_busy
-h# 720A constant spi_avail
+h# 7206 constant spi_ss
+h# 7208 constant spi_miso
+h# 720A constant spi_busy
+h# 720C constant spi_avail
 
 \ memory map CRC_7:
 \ se definen las direcciones de memoria de CRC_7

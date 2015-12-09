@@ -4,18 +4,20 @@
 
 `timescale 1ms / 1ns
 
-module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy, new_data);
+module spi_master (clk, rst, sssd_in, start, miso, data_in, mosi, sck, ss, sssd_out, data_out, busy, new_data);
 	
 	//inputs y outputs
 	
 	input clk;
 	input rst;
+	input sssd_in;
 	input start;
 	input miso; //master input slave output
 	input[7:0] data_in;
 	output mosi; //master output slave input
 	output sck;	//slave clk
 	output ss;	//slave select 
+	output sssd_out;
 	output[7:0] data_out;
 	output busy;
 	output new_data;
@@ -36,6 +38,8 @@ module spi_master (clk, rst, start, miso, data_in, mosi, sck, ss, data_out, busy
 	  reg [2:0] ctr_d, ctr_q;						//registros contador de transferencia spi
 	  reg new_data_d, new_data_q;						//registros new data d y q (avail-done)
 	  reg [7:0] data_out_d, data_out_q;		//registros dato de salida (solo asignan a data_out despues de avail) 
+	
+	  assign sssd_out = sssd_in;	
 	
 	  assign mosi = mosi_d;							//asigna mosi estado proximo
 	  assign sck = (~sck_q[CLK_DIV-1]) & (state_q == TRANSFER);	//si el con esta medio lleno y en estado de transferencia 
