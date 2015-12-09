@@ -2,10 +2,10 @@
 * Forth:
 	* Rutinas de trabajo único. Estas son para la sustentación individual.
 	* Enviar por serial el estado actual de la máquina:
-		* ~~Enviar Posición (x,y,z)mm ~~
-		* ~~Enviar Velocidad (x,y,z)mm/s ~~
-		* ~~Enviar Dirección (theta) ~~
-		* ~~Enviar Distancia a Obstáculo ~~
+		* ~~Enviar Posición (x,y,z)mm~~
+		* ~~Enviar Velocidad (x,y,z)mm/s~~
+		* ~~Enviar Dirección (theta)~~
+		* ~~Enviar Distancia a Obstáculo~~
 		* Enviar Habitación Guardada en SD (Opcional)
 	* Recibir peticiones y comandos por serial
 		* Petición de Posición
