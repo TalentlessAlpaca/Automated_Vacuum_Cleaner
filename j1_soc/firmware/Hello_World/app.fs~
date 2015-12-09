@@ -43,6 +43,8 @@ div_c @
 
 \ d# 55  \ se coloc el dato 55
 \ spi_mosi ! \ se envia a mosi \ ojo falta que wr este activo 
+d# 5 d# 4 d# 3 d# 2 d# 1 d# 0
+.S
 
 do
 1+
