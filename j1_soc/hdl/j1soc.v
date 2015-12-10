@@ -3,7 +3,7 @@ module j1soc#(
               parameter   bootram_file     = "../firmware/Hello_World/j1.mem"       // For simulation         
   )(
    uart_tx, ledout,
-   sys_clk_i, sys_rst_i, mosi ,miso, sck, ss, SDA, SCL, pwm, adelante, atras, rs, e , data
+   sys_clk_i, sys_rst_i, mosi ,miso, sck, ss, SDA, SCL, pwm, adelante, atras, rs, e , data, tx_channel, rx_channel, rx_busy, tx_busy
 	);
    
 // entradas y salidas fisicas
@@ -40,6 +40,12 @@ module j1soc#(
 	output SCL;
 	inout SDA;
 	wire SDA_oen, SDA_out ;	
+	
+	// Uart 2
+	input rx_channel;	// Canal de lectura 
+	output tx_channel;	// Canal de escritura (tranmision)
+	output tx_busy;		// Canal de transmision esta ocupado
+	output rx_busy ;	// Canal de lectura esta ocupado
 
 	assign SDA = (SDA_oen) ? SDA_out : 1'bz;
 	assign SDA_in = SDA;
