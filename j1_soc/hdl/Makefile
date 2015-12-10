@@ -22,10 +22,21 @@ dp_RAM		= dpRAM
 SPI		= spi_master
 CRC_7		= crc_7
 CRC_16		= crc_16
+BOOTH_64        = Booth_64
+DIRECCION       = Direccion
+I2C		= I2C
+INTEGRADOR	= integrador
+LCD		= LCD
+MULTIPLIER_V2   = Multiplier_V2
+POSITION	= Position
+PWM		= PWM
+TIMER_COUNTER   = Timer_Counter
+T_ROT		= T_Rot
+UART2           = UART
+ULTRASONICO  	= Ultrasonico
 
 
-SRC             = $(DESIGN).v j1.v dpram.v $(UART)/uart.v $(UART)/peripheral_uart.v $(MULT)/peripheral_mult.v  $(MULT_32)/acc.v  $(MULT_32)/comp.v  $(MULT_32)/control_mult.v  $(MULT_32)/lsr.v  $(MULT_32)/rsr.v  $(MULT_32)/mult_32.v $(DIV)/peripheral_div.v $(DIV_16)/control_div.v $(DIV_16)/counter_div.v $(DIV_16)/div_16.v $(DIV_16)/final_result.v $(DIV_16)/lsr_div.v $(DIV_16)/subtractor.v $(dp_RAM)/core_peripheric.v $(dp_RAM)/dualport_RAM.v $(dp_RAM)/dpRAM_interface.v $(SPI)/peripherical_spi_master.v $(SPI)/spi_master.v $(CRC_7)/peripheral_crc_7.v $(CRC_7)/crc_7.v $(CRC_16)/peripheral_crc_16.v $(CRC_16)/crc_16.v 
-SIM_SRC = $(DESIGN)_TB.v          \
+SRC             = $(DESIGN).v j1.v dpram.v $(UART)/uart.v $(UART)/peripheral_uart.v $(MULT)/peripheral_mult.v  $(MULT_32)/acc.v  $(MULT_32)/comp.v  $(MULT_32)/control_mult.v  $(MULT_32)/lsr.v  $(MULT_32)/rsr.v  $(MULT_32)/mult_32.v $(DIV)/peripheral_div.v $(DIV_16)/control_div.v $(DIV_16)/counter_div.v $(DIV_16)/div_16.v $(DIV_16)/final_result.v $(DIV_16)/lsr_div.v $(DIV_16)/subtractor.v $(dp_RAM)/core_peripheric.v $(dp_RAM)/dualport_RAM.v $(dp_RAM)/dpRAM_interface.v $(SPI)/peripherical_spi_master.v $(SPI)/spi_master.v $(SPI)/spi_perpheral_testbench.v $(SPI)/spi_master_testbench.v $(CRC_7)/peripheral_crc_7.v $(CRC_7)/crc_7.v $(CRC_7)/crc_7_testbench.v $(CRC_7)/peripheral_crc_7_testbench.v $(CRC_16)/peripheral_crc_16.v $(CRC_16)/crc_16.v $(CRC_16)/peripheral_crc_16_testbench.v $(CRC_16)/crc_16_testbench.v SIM_SRC = $(DESIGN)_TB.v $(BOOTH_64)/adder_64.v $(BOOTH_64)/Addition_64.v $(BOOTH_64)/booth_mult_64.v $(BOOTH_64)/comp_32.v  $(BOOTH_64)/rsa_64.v $(DIRECCION)/direccion.v $(DIRECCION)/peripheral_direccion.v $(I2C)/bit_ctr2l_tst.v $(I2C)/bit_ctrl.v $(I2C)/controller_tst.v $(I2C)/I2C_Top.v $(I2C)/MPU_controller.v $(I2C)/top_tst.v $(INTEGRADOR)/ader.v $(INTEGRADOR)/booth_mult.v $(INTEGRADOR)/comp.v $(INTEGRADOR)/integradorv2.v $(INTEGRADOR)/inter_tst.v $(INTEGRADOR)/rsa.v $(LCD)/clk_couter.v $(LCD)/clk_interruptor.v $(LCD)/LCD.v $(LCD)/LCD_Peripheral.v $(LCD)/Periphera_Test.v $(LCD)/Test_LCD.v $(MULTIPLIER_V2)/adder.v $(MULTIPLIER_V2)/addition.v $(MULTIPLIER_V2)/booth_mult.v $(MULTIPLIER_V2)/booth_tst.v $(MULTIPLIER_V2)/comp.v $(MULTIPLIER_V2)/rsa.v $(POSITION)/adder.v $(POSITION)/adder_64.v $(POSITION)/Addition_64.v $(POSITION)/bit_ctr2l_tst.v $(POSITION)/bit_ctrl.v $(POSITION)/booth_mult.v $(POSITION)/boot_mult-64.v $(POSITION)/clk_counter.v $(POSITION)/clk_generator.v $(POSITION)/clc_interruptor.v $(POSITION)/comp.v $(POSITION)/comp_32.v $(POSITION)/control_div.v $(POSITION)/controller_tst.v $(POSITION)/counter_div.v $(POSITION)/counter_tst.v $(POSITION)/div_64.v $(POSITION)/Div_tst.v $(POSITION)/Encoder.v $(POSITION)/encoder_tst.v $(POSITION)/final_result.v $(POSITION)/gen_clk_tst.v $(POSITION)/I2C_Top.v $(POSITION)/integrador_Pos.v $(POSITION)/Integrador_Theta.v $(POSITION)/Integradorv2.v $(POSITION)/Integrador_Vel.v $(POSITION)/int_clk_tst.v $(POSITION)/lsr_div.v $(POSITION)/MPU_controller.v $(POSITION)/position_j1_tst.v $(POSITION)/position_peripheral.v $(POSITION)/position_TopModule.v $(POSITION)/pwm.v $(POSITION)/RAM_Block.v $(POSITION)/RAM_tst.v $(POSITION)/Rot_tst.v $(POSITION)/rsa.v $(POSITION)/rsa_64.v $(POSITION)/subtractor.v $(POSITION)/theta_integ_tst.v $(POSITION)/Top_BackBox.v $(POSITION)/TopModuleTransfLineal.v $(POSITION)/topPos_module_tst.v $(POSITION)/TOP_Rotation_tst.v $(POSITION)/top_tst.v $(PWM)/peripherial_pwm.v $(PWM)/PWM.v  $(PWM)/PWM_tb.v $(TIMER_COUNTER)/clk_counter.v $(TIMER_COUNTER)/clk_generator.v $(TIMER_COUNTER)/clk_interruptor.v $(TIMER_COUNTER)/clk_on.v $(TIMER_COUNTER)/clk_on_tb.v $(TIMER_COUNTER)/counter_tst.v $(TIMER_COUNTER)/gen_clk_tst.v $(TIMER_COUNTER)/int_clk_tst.v $(TIMER_COUNTER)/Peripheral_clk_interruptor.v $(TIMER_COUNTER)/Periph_gen_clk_tst.v $(TIMER_COUNTER)/Periph_int_clk_tst.v $(TIMER_COUNTER)/Timer_Peripheral.v  $(T_ROT)/adder.v $(T_ROT)/booth_mult.v $(T_ROT)/booth_tst.v $(T_ROT)/comp.v $(T_ROT)/Encoder.v $(T_ROT)/encoder_tst.v $(T_ROT)/RAM_Block.v $(T_ROT)/RAM_tst.v $(T_ROT)/Rot_tst.v $(T_ROT)/rsa.v $(T_ROT)/Top_BackBox.v $(T_ROT)/TopModueTransfLineal.v $(T_ROT)/TOP_Rotation_tst.v $(UART2)/peripheral_uart_2.v $(UART2)/uart_2.v $(ULTRASONICO)/clk_counter.v $(ULTRASONICO)/peripheral.v $(ULTRASONICO)/ultrasonic.v $(ULTRASONICO)/ultrasonic_control.v $(ULTRASONICO)/ultrasonic_control_tb.v $(ULTRASONICO)/Ultrasonico_tb.v  \
 
  
 all:            bits

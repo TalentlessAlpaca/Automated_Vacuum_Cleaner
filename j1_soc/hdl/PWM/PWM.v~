@@ -1,4 +1,4 @@
-module PWM #(parameter L=8 ) (
+module PWM #(parameter L=10 ) (
 	input clk,
 	input rst_n,
 	input [L-1 : 0] number,
