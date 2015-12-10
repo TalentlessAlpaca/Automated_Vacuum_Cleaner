@@ -10,7 +10,7 @@ module spi_master (clk, rst, sssd_in, start, miso, data_in, mosi, sck, ss, sssd_
 	
 	input clk;
 	input rst;
-	input sssd_in; 
+	input sssd_in;
 	input start;
 	input miso; //master input slave output
 	input[7:0] data_in;
@@ -49,9 +49,7 @@ module spi_master (clk, rst, sssd_in, start, miso, data_in, mosi, sck, ss, sssd_
 	  assign data_out = data_out_q;					//asignar a data_out ---> dataout_q
 	  assign new_data = new_data_q;					//asigna a new_data  ---> new_data_q
 	   
-	//bloque combinacional
-
-	always @(*) begin
+		always @(*) begin
 			 sck_d = sck_q;		//asignar registros actuales a registro proximo
 			 data_d = data_q;		//asignar registros actuales a registro proximo
 			 mosi_d = mosi_q;		//asignar registros actuales a registro proximo
@@ -59,10 +57,12 @@ module spi_master (clk, rst, sssd_in, start, miso, data_in, mosi, sck, ss, sssd_
 			 new_data_d = 1'b0;		//new data es 0 hasta haber terminado
 			 data_out_d = data_out_q;	//asignar registros actuales a registro proximo
 			 state_d = state_q;		//asignar registros actuales a registro proximo
-
+	//	end
 		
+	//bloque combinacional
 
-
+	  //always @(negedge clk) begin
+	     
 	    case (state_q)
 	      IDLE: begin		   //estado IDLE (reposo)
 		sck_d = 4'b0;              // reset clock counter - se resetea contdor de reloj
@@ -88,7 +88,7 @@ module spi_master (clk, rst, sssd_in, start, miso, data_in, mosi, sck, ss, sssd_
 		else if (sck_q == {CLK_DIV-1{1'b1}}) begin  // else if it's half full (about to fall) -  si contador de reloj esta 
 								//medio lleno ---> recibe :D
 								// cambiar -1 para cambiar fase 
-		  data_d = {data_q[6:0], miso};      //*********// read in data (shift in) - leer miso e insertar al reg por corrimiento  
+		  data_d = {data_q[6:0], miso};                 // read in data (shift in) - leer miso e insertar al reg por corrimiento  
 		end 
 		else if (sck_q == {CLK_DIV{1'b1}}) begin    // else if it's full (about to rise) - si esta lleno el contador de reloj
 								// cambiar -1 para cambiar fase 

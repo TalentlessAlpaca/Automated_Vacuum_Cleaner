@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   23:26:33 12/01/2015
-// Design Name:   crc_16
-// Module Name:   /home/jorge/Documentos/SPI_SD/crc_16_testbench.v
+// Create Date:   22:13:59 12/01/2015
+// Design Name:   spi_master
+// Module Name:   /home/jorge/Documentos/SPI_SD/spi_master_testbench.v
 // Project Name:  SPI_SD
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: crc_16
+// Verilog Test Fixture created by ISE for module: spi_master
 //
 // Dependencies:
 // 
@@ -22,17 +22,24 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module crc_16_testbench;
+module spi_master_testbench;
 
 	// Inputs
-	reg start;
 	reg clk;
 	reg rst;
-	reg [31:0] data_in;
+	reg sssd_in;
+	reg start;
+	reg miso;
+	reg [7:0] data_in;
 
 	// Outputs
-	wire [16:0] data_out;
-	wire done;
+	wire mosi;
+	wire sck;
+	wire ss;
+	wire sssd_out;
+	wire [7:0] data_out;
+	wire busy;
+	wire new_data;
 	
 	//parameters
 	parameter PERIOD          = 10;
@@ -40,22 +47,32 @@ module crc_16_testbench;
    parameter OFFSET          = 0;
 
 	// Instantiate the Unit Under Test (UUT)
-	crc_16 uut (
-		.start(start), 
+	spi_master uut (
 		.clk(clk), 
 		.rst(rst), 
+		.sssd_in(sssd_in),
+		.start(start), 
+		.miso(miso), 
 		.data_in(data_in), 
+		.mosi(mosi), 
+		.sck(sck), 
+		.ss(ss), 
+		.ss(sssd_out),
 		.data_out(data_out), 
-		.done(done)
+		.busy(busy), 
+		.new_data(new_data)
 	);
 
 	initial begin
 		// Initialize Inputs
-		start = 0;
 		clk = 0;
 		rst = 1;
+		sssd_in = 1;
+		start = 0;
+		miso = 0;
 		data_in = 0;
-#OFFSET
+			
+	#OFFSET
      forever
 			begin
 				clk = 1'b1;
@@ -63,18 +80,30 @@ module crc_16_testbench;
 				#(PERIOD*DUTY_CYCLE);
 			end	
 	end
-		
+	
 	initial begin
+	#OFFSET
+		forever
+			begin
+				miso = 1'b1;
+				#(3*PERIOD) miso = 1'b0;
+				#(3*PERIOD);
+			end
+	end
+	
+	initial begin
+	
 		// Wait 10 ns for global reset to finish
 		#10;
-        rst=0;
-		  start=1;
-		  data_in=32'h00A2E015;
-		#10; 
+			rst=0;
+			start=1;
+			sssd_in=0;
+			data_in=01011100;
+		#10
 			start=0;
 		@(*)begin
-			if (done) begin
-				#10
+			if (new_data)begin
+				#20
 					rst=1;
 				#10
 					rst=0;
@@ -83,4 +112,5 @@ module crc_16_testbench;
 	end
       
 endmodule
+
 

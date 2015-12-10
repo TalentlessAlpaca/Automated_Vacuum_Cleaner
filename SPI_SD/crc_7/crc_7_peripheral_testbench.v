@@ -63,8 +63,10 @@ module crc_7_peripheral_testbench;
 		addr = 0;
 		rd = 0;
 		wr = 0;
+		
+		//clk
 		#OFFSET
-		  forever
+		forever
 				begin
 					clk = 1'b1;
 					#(PERIOD-(PERIOD*DUTY_CYCLE)) clk = 1'b0;
@@ -77,28 +79,32 @@ module crc_7_peripheral_testbench;
 		// Wait 10 ns for global reset to finish
 		#10;
 			rst = 1;
-	   #10;		
+	 	#10;		
 			rst = 0;
 		#10 
+			// se coloca en la direccion data in la primera parte del dato a operar
 			wr = 1;
 			addr = 4'h0;
-			d_in = 16'h00AE;
+			d_in = 16'h3A5E;
 		#10
+			//se coloca start en 1 en la direccion de start
 			wr = 1;
 			addr = 4'h2;
-			d_in = 16'h3B05;
-		#10
-			wr = 1;
-			addr = 4'h4;
 			d_in [0] = 1;
 		#10
+			//se coloca start en 0 en la direccion de start
+			wr = 1;
+			addr = 4'h2;
+			d_in [0] = 0;
+		#10
+			// se lee la direccion done 
 			wr = 0;
 			rd = 1;
-			addr = 4'h6;
+			addr = 4'h4;
 		#10
 		@(*)begin
-			if (d_out[0]) begin
-				addr = 4'h8;
+			if (d_out[0]) begin //si se tiene un nuevo dato se lee la direccion d_out y se resetea
+				addr = 4'h6;
 				#20
 					rst=1;
 					cs=0;

@@ -38,7 +38,7 @@ module spi_master_peripheral_testbench;
 	
 	//c fisicas
 	reg rmiso;
-	wire mosi, ss, sck;
+	wire mosi, sssd_out, sck;
 		
 	//parameters
 	parameter PERIOD          = 10;
@@ -57,7 +57,7 @@ module spi_master_peripheral_testbench;
 		.d_out(d_out),
 		.miso(rmiso),
 		.mosi(mosi),
-		.ss(ss),
+		.sssd_out(sssd_out),
 		.sck(sck)
 	);
 
@@ -72,6 +72,7 @@ module spi_master_peripheral_testbench;
 		wr = 0;
 		rmiso = 0;
 		
+		//clk
 		#OFFSET
 		  forever
 				begin
@@ -82,7 +83,8 @@ module spi_master_peripheral_testbench;
 	end
 	
 	initial begin
-	#OFFSET
+		//se simula miso como un reloj de mayor periodo
+		#OFFSET
 		forever
 			begin
 				rmiso = 1'b1;
@@ -95,34 +97,50 @@ module spi_master_peripheral_testbench;
 	initial begin
 		// Wait 10 ns for global reset to finish
 		#10;
-			rst = 1;
-	   #10;		
-			rst = 0;
-		#10
 			wr = 1;
+			addr= 4'h4;
+			d_in[0]= 1'b1;
+	  	#10;		
+			wr = 1;
+			addr= 4'h4;
+			d_in[0]= 1'b0;
+		#10
+			wr = 1;	
+			addr=4'h6
+			d_in[0] = 1'b0;
+		#10
+			//se coloca el dato a transmitir en la direccion deescritura MOSI
+			wr = 1; 
 			addr = 4'h0;
 			d_in[7:0] = 8'b10111001;
 		#10
+			//se coloca start en 1 en la direccion de start
 			wr=1;
 			addr = 4'h2;
 			d_in[0]= 1'b1;
 		#10
+			//se coloca start en 1 en la direccion de start
 			wr=1;
 			addr = 4'h2;
 			d_in[0]= 1'b0;
 		#10
+			//se lee la direccion new data 
 			wr=0;
 			rd=1;
-			addr = 4'h8;
+			addr = 4'hC;
 		#10
 		@(*)begin
-			if (d_out[0]) begin
-				addr = 4'h4;
+			if (d_out[0]) begin //si se tiene un nuevo dato se lee la direccion de MISO y se resetea
+				addr = 4'h8;
 				#20
-					rst=1;
+					wr = 1;
+					addr= 4'h4;
+					d_in[0]= 1'b1;
 					cs=0;
 				#10
-					rst=0;
+					wr = 1;
+					addr= 4'h4;
+					d_in[0]= 1'b0;
 			end
 		end
 	end
