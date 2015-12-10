@@ -109,6 +109,10 @@ h# 6304 constant counter
 h# 6400 constant Done
 h# 6401 constant Value
 
+\ direccion
+h# 6500 constant MotorUno
+h# 6502 constant MotorDos
+
 \ constantes 
 
 \ constantes memoria 
