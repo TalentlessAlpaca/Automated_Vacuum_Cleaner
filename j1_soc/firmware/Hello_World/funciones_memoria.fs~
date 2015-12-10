@@ -207,13 +207,13 @@
 	d# 32 d# 0 do
 	
 
-
 	loop
 
 	 \ falta terminar peripheral uart para terminar 
 
+	
+;
 
-	
-	
-	
+
+: send_ram2
 ;
