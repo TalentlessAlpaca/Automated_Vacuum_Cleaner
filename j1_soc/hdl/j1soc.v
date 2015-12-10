@@ -3,14 +3,14 @@ module j1soc#(
               parameter   bootram_file     = "../firmware/Hello_World/j1.mem"       // For simulation         
   )(
    uart_tx, ledout,
-   sys_clk_i, sys_rst_i, mosi ,miso, sck, ss
-   );
-
+   sys_clk_i, sys_rst_i, mosi ,miso, sck, ss, SDA, SCL, pwm, adelante, atras, rs, e , data,
+	);
+   
 // entradas y salidas fisicas
 
-   input sys_clk_i, sys_rst_i;
-   output uart_tx;
-   output ledout;
+	input sys_clk_i, sys_rst_i;
+	output uart_tx;
+	output ledout;
 
    //spi
 	input mosi;
@@ -18,23 +18,32 @@ module j1soc#(
 	output sck;
 	output ss;
 	
+	// I2C
+	inout SDA;
+	output SCL;
+	
 	//pwm
-	output pwm [2,0];
+	output [2:0] pwm ;
+	
+	// Direccion
+	output [1:0] adelante ;
+	output [1:0] atras	 ;
 	
 	//LCD
 	
 	output rs;
 	output e;
-	output data;
+	output [7:0] data;
 	
 	//posicion
 	
 	output SCL;
 	inout SDA;
-	
+	wire SDA_oen, SDA_out ;	
+
 	assign SDA = (SDA_oen) ? SDA_out : 1'bz;
 	assign SDA_in = SDA;
-
+	
 //------------------------------------ regs and wires-------------------------------
 
    wire                 j1_io_rd;//********************** J1
@@ -45,7 +54,7 @@ module j1soc#(
 
 
  
-   reg [1:12]cs;  		// CHIP-SELECT //cantidad de modulos 
+   reg [1:13]cs;  		// CHIP-SELECT //cantidad de modulos 
 
    wire			[15:0] mult_dout;  
    wire			[15:0] div_dout;
@@ -59,6 +68,7 @@ module j1soc#(
    wire 		[15:0] posicion_dout;
    wire 		[15:0] timmer_dout;
    wire			[15:0] distancia_dout;  
+   wire			[15:0] direccion;  
  
 
 //------------------------------------ regs and wires-------------------------------
@@ -84,9 +94,11 @@ module j1soc#(
 
   peripheral_pwm per_pwm (.clk(sys_clk_i),.rst(sys_rst_i),.d_in(j1_io_dout),.d_out(pwm_out),.cs(cs[8]),.addr(j1_io_addr[3:0]),.rd(j1_io_rd),.wr(j1_io_wr),.pwm(pwm));
 
+  peripheral_direccion per_dir (.clk(sys_clk_i),.rst(sys_rst_i),.d_in(j1_io_dout),.d_out(pwm_out),.cs(cs[8]),.addr(j1_io_addr[3:0]),.rd(j1_io_rd),.wr(j1_io_wr),.adelante(adelante),.atras(atras));
+  
   LCD_Peripheral  per_lcd (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[9]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(lcd_out), .rs(lcd_rs), .e(lcd_e), .data(lcd_data), .int_cnt(int_cnt), .en_cnt(en_cnt), .limit_cnt(limit_cnt) ); 
 
-  position_peripheral (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[10]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(posicion_out), .clk_freq(clk_freq), .counter_rst(counter_rst), .counter_en (counter_en), . int_en(int_en), .int_limit(int_limit), .SCL(SCL), .SDA_out(SDA_out), .SDA_oen(SDA_oen), .counter_count(counter_count), .clk_frame(clk_frame), .int_o(int_o), .SDA_in(SDA_in); 
+  position_peripheral (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[10]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(posicion_out), .clk_freq(clk_freq), .counter_rst(counter_rst), .counter_en (counter_en), . int_en(int_en), .int_limit(int_limit), .SCL(SCL), .SDA_out(SDA_out), .SDA_oen(SDA_oen), .counter_count(counter_count), .clk_frame(clk_frame), .int_o(int_o), .SDA_in(SDA_in)); 
   
   peripheral_timmer (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[11]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr),.d_out( timmer_out ));
   
@@ -97,23 +109,23 @@ module j1soc#(
   always @*
   begin
       case (j1_io_addr[15:8])				// direcciones - chip_select
-        8'h67: cs= 12'b100000000000; 		//mult
-        8'h68: cs= 12'b010000000000;		//div
-        8'h69: cs= 12'b001000000000;		//uart
-        8'h70: cs= 12'b000100000000;		//dp_ram
-        8'h72: cs= 12'b000010000000;		//spi
-	8'h74: cs= 12'b000001000000;     	//crc_7
-	8'h76: cs= 12'b000000100000;		//crc_16
-        8'h60: cs= 12'b000000010000;		//pwm
-        8'h61: cs= 12'b000000001000;		//lcd
-        8'h62: cs= 12'b000000000100;		//posicion
-        8'h63: cs= 12'b000000000010;		//timmer
-	8'h64: cs= 12'b000000000001;     	//distancia
+        8'h67: cs= 13'b1000000000000; 		//mult
+        8'h68: cs= 13'b0100000000000;		//div
+        8'h69: cs= 13'b0010000000000;		//uart
+        8'h70: cs= 13'b0001000000000;		//dp_ram
+        8'h72: cs= 13'b0000100000000;		//spi
+	8'h74: cs= 13'b0000010000000;     	//crc_7
+	8'h76: cs= 13'b0000001000000;		//crc_16
+        8'h60: cs= 13'b0000000100000;		//pwm
+        8'h61: cs= 13'b0000000010000;		//lcd
+        8'h62: cs= 13'b0000000001000;		//posicion
+        8'h63: cs= 13'b0000000000100;		//timmer
+	8'h64: cs= 13'b0000000000010;     	//distancia
+	8'h65: cs= 13'b0000000000001;     	//direccion	
 		
 		
 		
-		
-        default: cs= 12'b000000000000;
+        default: cs= 13'b0000000000000;
       endcase
   end
   // ============== Chip_Select (Addres decoder) ========================  //
@@ -125,18 +137,19 @@ module j1soc#(
   always @*
   begin
       case (cs)
-        12'b100000000000: j1_io_din = mult_dout; 
-        12'b010000000000: j1_io_din = div_dout;
-        12'b001000000000: j1_io_din = uart_dout; 
-        12'b000100000000: j1_io_din = dp_ram_dout; 
-        12'b000010000000: j1_io_din = spi_master_dout; 
-	12'b000001000000: j1_io_din = crc_7_dout;
-	12'b000000100000: j1_io_din = crc_16_dout;
-	12'b000000010000: j1_io_din = pwm_dout;
-    	12'b000000001000: j1_io_din = lcd_dout;
-	12'b000000000100: j1_io_din = posicion_dout;	
-	12'b000000000010: j1_io_din = timmer_dout;
-	12'b000000000001: j1_io_din = distancia_dout;	
+        13'b1000000000000: j1_io_din = mult_dout; 
+        13'b0100000000000: j1_io_din = div_dout;
+        13'b0010000000000: j1_io_din = uart_dout; 
+        13'b0001000000000: j1_io_din = dp_ram_dout; 
+        13'b0000100000000: j1_io_din = spi_master_dout; 
+	13'b0000010000000: j1_io_din = crc_7_dout;
+	13'b0000001000000: j1_io_din = crc_16_dout;
+	13'b0000000100000: j1_io_din = pwm_dout;
+    	13'b0000000010000: j1_io_din = lcd_dout;
+	13'b0000000001000: j1_io_din = posicion_dout;	
+	13'b0000000000100: j1_io_din = timmer_dout;
+	13'b0000000000010: j1_io_din = distancia_dout;	
+	13'b0000000000001: j1_io_din = direccion;	
 		
 		
 		default: j1_io_din = 16'h0666;
