@@ -145,7 +145,7 @@ module position_topModule(
 		.ZAc(rot_z)
 	 );
 	 
-	 Integradorv2 velX(
+	 Integrador_vel velX(
 		.clk(clk),
 		.rst(velX_integ_rst),
 		.enable(velX_integ_en),
@@ -156,7 +156,7 @@ module position_topModule(
 		.v(velX_integ_out)
 	 );
 	 
-	 Integradorv2 velY(
+	 Integrador_vel velY(
 		.clk(clk),
 		.rst(velY_integ_rst),
 		.enable(velY_integ_en),
@@ -167,7 +167,7 @@ module position_topModule(
 		.v(velY_integ_out)
 	 );
 	 
-	 Integradorv2 posX(
+	 Integrador_pos posX(
 		.clk(clk),
 		.rst(posX_integ_rst),
 		.enable(posX_integ_en),
@@ -178,7 +178,7 @@ module position_topModule(
 		.v(posX_integ_out)
 	 );
 	 
-	 Integradorv2 posY(
+	 Integrador_pos posY(
 		.clk(clk),
 		.rst(posY_integ_rst),
 		.enable(posY_integ_en),

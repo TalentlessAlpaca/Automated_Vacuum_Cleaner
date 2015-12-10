@@ -40,7 +40,7 @@ module Integradorv2(
 	 initial v = 32'h0000;
 	 	 booth_mult Multi(.clk(clk),.rst(rest), .en(en),.A(dt),.B(varI),.busy(ready),.R(varS));
 	 
-	 //--------------------------------Modulo states
+	 //--------------------------------Module states
 	
 	 
 	 
