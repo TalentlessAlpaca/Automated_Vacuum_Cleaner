@@ -54,11 +54,11 @@ module j1soc#(
   dpRAM_interface dpRm(.clk(sys_clk_i), .d_in(j1_io_dout), .cs(cs[4]), .addr(j1_io_addr[7:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(dp_ram_dout));
 
 
-  peripheral_spi_master  per_spi (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[5]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(mult_dout) , .mosi(mosi) ,.miso(miso), .sck(sck), .ss(ss) ); //se instancia el peripheral de spi
+  peripheral_spi_master  per_spi (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[5]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(spi_master_dout) , .mosi(mosi) ,.miso(miso), .sck(sck), .ss(ss) ); //se instancia el peripheral de spi
 
- peripheral_crc_7  per_crc_7 (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[1]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(mult_dout) ); //se instancia el peripheral de crc_7
+ peripheral_crc_7  per_crc_7 (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[6]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(crc_7_dout) ); //se instancia el peripheral de crc_7
 
- peripheral_crc_16  per_crc_16 (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[1]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(mult_dout) ); //se instancia el peripheral de crc_16
+ peripheral_crc_16  per_crc_16 (.clk(sys_clk_i), .rst(sys_rst_i), .d_in(j1_io_dout), .cs(cs[7]), .addr(j1_io_addr[3:0]), .rd(j1_io_rd), .wr(j1_io_wr), .d_out(crc_16_dout) ); //se instancia el peripheral de crc_16
 
 
   // ============== Chip_Select (Addres decoder) ========================  // se hace con los 8 bits mas significativos de j1_io_addr
@@ -72,6 +72,7 @@ module j1soc#(
         8'h72: cs= 7'b0000100;		//spi
 	8'h74: cs= 7'b0000010;          //crc_7
 	8'h76: cs= 7'b0000001;		//crc_16
+
      
         default: cs= 7'b0000000;
       endcase
