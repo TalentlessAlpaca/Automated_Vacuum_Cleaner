@@ -1,4 +1,4 @@
-module peripheral_uart (
+module peripheral_uart_2 (
 
 	// Conexiones al J!
 	
@@ -61,7 +61,7 @@ module peripheral_uart (
 	end
 
 	
-	uart uart (
+	uart_2 uart (
 		.clk(clk),	
 		.clk_Hz,	
 		.tx_Hz,
