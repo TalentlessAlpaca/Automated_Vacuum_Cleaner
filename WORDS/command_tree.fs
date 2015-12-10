@@ -1,0 +1,189 @@
+: STAR_ROOMBA
+	." START "
+;
+
+: STOP_ROOMBA
+	." STOP ROOMBA "
+;
+
+: MOVE_FORWARD
+	." FORWARD AT VELOCITY " .
+;
+
+: MOVE_RIGHT
+	." RIGHT AT VELOCITY " .
+;
+
+: MOVE_BACK
+	." BACK AT VELOCITY " .
+;
+
+: MOVE_LEFT
+	." LEFT AT VELOCITY " .
+;
+
+: READ_BYTES_MEM
+	SWAP ." WRITE " . ." BYTES, DO FROM " .
+;
+
+: READ_PAGE_MEM
+
+;
+
+: WRITE_BYTE
+
+;
+
+: WRITE_PAGE
+
+;
+
+: REQUEST_POS_X
+
+;
+
+: REQUEST_POS_Y
+
+;
+
+: REQUEST_VEL_X
+
+;
+
+: REQUEST_VEL_Y
+
+;
+
+: REQUEST_THETA
+
+;
+
+: REQUEST_OBSTACLE
+
+;
+
+: REQUEST_MOTORS
+
+;
+
+: FAN_START
+
+;
+
+: FAN_CHANGE
+
+;
+
+: FAN_STOP
+
+;
+
+: ERROR
+	." FUCK YOU "
+;
+
+: COMMAND_TREE
+	CASE
+		'S' OF STAR_ROOMBA ENDOF
+		'P' OF STOP_ROOMBA ENDOF
+		'M' OF ." MOVEMENT " DROP
+			CASE
+				'F' OF ." FRONT " DROP
+					CASE
+						'0' OF 0  MOVE_FORWARD ENDOF
+						'1' OF 1  MOVE_FORWARD ENDOF
+						'2' OF 2  MOVE_FORWARD ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				'R' OF ." RIGHT " DROP
+					CASE
+						'0' OF 0  DROP SWAP MOVE_RIGHT ENDOF
+						'1' OF 1  DROP SWAP MOVE_RIGHT ENDOF
+						'2' OF 2  DROP SWAP MOVE_RIGHT ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				'B' OF ." BACK "  DROP
+					CASE
+						'0' OF 0  MOVE_BACK ENDOF
+						'1' OF 1  MOVE_BACK ENDOF
+						'2' OF 2  MOVE_BACK ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				'L' OF ." LEFT " DROP
+					CASE
+						'0' OF 0  DROP SWAP MOVE_LEFT ENDOF
+						'1' OF 1  DROP SWAP MOVE_LEFT ENDOF
+						'2' OF 2  DROP SWAP MOVE_LEFT ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				ERROR
+			ENDCASE	
+		ENDOF
+		'R' OF ." READ " DROP
+			CASE
+				'P' OF READ_PAGE_MEM ENDOF
+				STRING2INT READ_BYTES_MEM 0x80000
+			ENDCASE
+		ENDOF
+		'W' OF ." WRITE " DROP
+			CASE
+				'B' OF DROP
+					STRING2INT SWAP DUP
+					." WRITE " . ." AT " SWAP .
+				ENDOF
+				'P' OF ." WRITE PAGE, WAIT FOR OK " ENDOF
+				ERROR
+			ENDCASE
+		ENDOF
+		'Q' OF ." QUERY " DROP
+			CASE
+				'P' OF ." POSITION " DROP
+					CASE
+						'X' OF ." X " ENDOF
+						'Y' OF ." Y " ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				'V' OF ." VELOCITY " DROP
+					CASE
+						'X' OF ." X " ENDOF
+						'Y' OF ." Y " ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				'T' OF ." PRINT THETA " ENDOF
+				'O' OF ." PRINT OBSTACLE " ENDOF
+				'M' OF ." PRINT MOTORS INFORMATION " ENDOF
+				ERROR
+			ENDCASE		
+		ENDOF
+		'F' OF ." FAN " DROP
+			CASE
+				'S' OF ." START FAN " DROP
+					CASE
+						'0' OF ." LOW VEL " ENDOF
+						'1' OF ." MID VEL " ENDOF
+						'2' OF ." HIGH VEL " ENDOF
+						ERROR
+					ENDCASE
+				ENDOF
+				'C' OF ." CHANGE VEL TO " DROP
+					CASE
+						'0' OF ." LOW " ENDOF
+						'1' OF ." MID " ENDOF
+						'2' OF ." HIGH " ENDOF
+						ERROR
+					ENDCASE				
+				ENDOF
+				'P' OF ." STOP FAN " ENDOF
+				ERROR
+			ENDCASE
+		ENDOF
+		ERROR
+	ENDCASE
+	
+;
