@@ -3,7 +3,7 @@
 // Signal entra desde el modulo físico del ultrasonico, las demás señales pertenecen a la interaccion que tiene con el J1
 // Solo hay lectura de datos. una vez se desactiva el estado de reset, el módulo se prepara para recibir la señal y hacer el conteo
 
-module peripheral_ult(
+module peripheral_mult(
 	input 			clk,
 	input 			rst,
 	input [15:0]	d_in,	// Dato de entrada
@@ -19,29 +19,46 @@ module peripheral_ult(
 //------------------------------------ regs and wires-------------------------------
 
 	reg [1:0] 		s; 	// Selector
-
-	wire 			rst_n = ~rst ;
     wire [15:0] 	value ; 
     wire 			done ;
+	
+	reg enable ;
 
 //------------------------------------ regs and wires-------------------------------
 
 	always @(*) begin// Selector de modo
 		case (addr)
-			4'h0:		s = (cs && rd) ? 2'b01 : 2'b00 ; // Done
-			4'h2:		s = (cs && rd) ? 2'b10 : 2'b00 ; // Value[15:0]
-			default: 	s = 2'b00 ;
+			4'h0:		s = (cs && wr) ? 4'b0001 : 4'b000 ; // Enable
+		
+			4'h2:		s = (cs && rd) ? 4'b0010 : 4'b000 ; // Busy
+			4'h4:		s = (cs && rd) ? 4'b0100 : 4'b000 ; // Value [7:0]
+			4'h6:		s = (cs && rd) ? 4'b1000 : 4'b000 ; // Value [15:8]
+			default: 	s = 4'b000 ;
 		endcase
 	end
 
+	always @(negedge clk) begin // Multiplexa entradas del periferico
+		case (s)
+			4'b0001:	 	enable 		= 1 ;
+			default:	d_out   	= 0 ;
+		endcase
+	end
+	
 	always @(negedge clk) begin // Multiplexa salidas del periferico
 		case (s)
-			2'b01:	 	d_out[0] 	= done ;
-			2'b10: 		d_out    	= value[15:0] ;
+			4'b0010:	d_out[0] 	= done ;
+			4'b0100: 	d_out    	= value[7:0] ;
+			4'b1000: 	d_out    	= value[15:8] ;
 			default:	d_out   	= 0 ;
 		endcase
 	end
 
-	ultrasonic  ut ( .clk(clk), .rst_n(rst_n), .signal(signal) , .value(value) , .done(done) );
+	ultrasonic ult ( 
+		.clk(clk), 
+		.enable(enable), 
+		.signal(signal) , 
+		.value(value) , 
+		.done(done) 
+		);
 
 endmodule
