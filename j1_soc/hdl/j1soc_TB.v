@@ -9,7 +9,7 @@ reg sys_clk_i, sys_rst_i;
 wire  uart_tx, ledout; 
 
 j1soc uut (
-	 uart_tx, ledout, sys_clk_i, sys_rst_i, mosi ,miso, sck, ss //se definen las salidas fisicas 
+	 uart_tx, ledout, sys_clk_i, sys_rst_i, mosi ,miso, sck, sssd_out, pwm , rs, e, data, SCL, SDA //se definen las salidas fisicas 
 );
 
 initial begin

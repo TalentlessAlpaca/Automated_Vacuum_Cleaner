@@ -38,7 +38,7 @@ module spi_master_peripheral_testbench;
 	
 	//c fisicas
 	reg rmiso;
-	wire mosi, ss, sck;
+	wire mosi, sssd_out, sck;
 		
 	//parameters
 	parameter PERIOD          = 10;
@@ -57,7 +57,7 @@ module spi_master_peripheral_testbench;
 		.d_out(d_out),
 		.miso(rmiso),
 		.mosi(mosi),
-		.ss(ss),
+		.sssd_out(sssd_out),
 		.sck(sck)
 	);
 
@@ -97,9 +97,17 @@ module spi_master_peripheral_testbench;
 	initial begin
 		// Wait 10 ns for global reset to finish
 		#10;
-			rst = 1;
+			wr = 1;
+			addr= 4'h4;
+			d_in[0]= 1'b1;
 	  	#10;		
-			rst = 0;
+			wr = 1;
+			addr= 4'h4;
+			d_in[0]= 1'b0;
+		#10
+			wr = 1;	
+			addr=4'h6
+			d_in[0] = 1'b0;
 		#10
 			//se coloca el dato a transmitir en la direccion deescritura MOSI
 			wr = 1; 
@@ -119,16 +127,20 @@ module spi_master_peripheral_testbench;
 			//se lee la direccion new data 
 			wr=0;
 			rd=1;
-			addr = 4'h8;
+			addr = 4'hC;
 		#10
 		@(*)begin
 			if (d_out[0]) begin //si se tiene un nuevo dato se lee la direccion de MISO y se resetea
-				addr = 4'h4;
+				addr = 4'h8;
 				#20
-					rst=1;
+					wr = 1;
+					addr= 4'h4;
+					d_in[0]= 1'b1;
 					cs=0;
 				#10
-					rst=0;
+					wr = 1;
+					addr= 4'h4;
+					d_in[0]= 1'b0;
 			end
 		end
 	end

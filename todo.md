@@ -1,63 +1,65 @@
 # TODO List
 * Forth:
-	* Rutinas de trabajo 鷑ico. Estas son para la sustentaci髇 individual.
-	* Enviar por serial el estado actual de la m醧uina:
-		* Enviar Posici髇 (x,y,z)mm
-		* Enviar Velocidad (x,y,z)mm/s
-		* Enviar Direcci髇 (theta)
-		* Enviar Distancia a Obst醕ulo
-		* Enviar Habitaci髇 Guardada en SD (Opcional)
+	* Rutinas de trabajo 煤nico. Estas son para la sustentaci贸n individual.
+	* Enviar por serial el estado actual de la m谩quina:
+		* ~~Enviar Posici贸n (x,y,z)mm~~
+		* ~~Enviar Velocidad (x,y,z)mm/s~~
+		* ~~Enviar Direcci贸n (theta)~~
+		* ~~Enviar Distancia a Obst谩culo~~
+		* Enviar Habitaci贸n Guardada en SD (Opcional)
 	* Recibir peticiones y comandos por serial
-		* Petici髇 de Posici髇
-		* Petici髇 de Velocidad
-		* Petici髇 de Direcci髇
-		* Petici髇 de Distancia a Obst醕ulo
-		* Petici髇 de Start
-		* Petici髇 de Stop
-		* Petici髇 de cambio de Velocidad
-		* Guardar Informaci髇 de Habitaci髇 en SD
-	* Gen閞icas:
+		* Petici贸n de Posici贸n
+		* Petici贸n de Velocidad
+		* Petici贸n de Direcci贸n
+		* Petici贸n de Distancia a Obst谩culo
+		* Petici贸n de Start
+		* Petici贸n de Stop
+		* Petici贸n de cambio de Velocidad
+		* Guardar Informaci贸n de Habitaci贸n en SD
+	* Gen茅ricas:
 		* Recibir string serial e interpretarla
 		* Escribir mensaje en la LCD
 		* Encender/Apagar motores
 		* Variar velocidad Motores
 		* Variar color STATUS LED
 * Java:
-	* Protocolo de comunicaci髇 con ROOMBA
-	* Construir habitaci髇 virtual a partir de informaci髇 recibida
-	* Mostrar gr醘icamente la habitaci髇 explorada
+	* Protocolo de comunicaci贸n con ROOMBA
+	* Construir habitaci贸n virtual a partir de informaci贸n recibida
+	* Mostrar gr谩ficamente la habitaci贸n explorada
 
 * Verilog & Xilinx:
-	* M骴ulos J1 faltantes
+	* M贸dulos J1 faltantes
 	* Simulaciones post Place&Route
 	* Test Benches para usar con con el J1 (Integradas con el software)
 	* Cualquier HW sencillo que pueda facilitarnos el trabajo
-	* M醧uinas de estados para probar los m骴ulos sin el J1 (Por si todo falla)
+	* M谩quinas de estados para probar los m贸dulos sin el J1 (Por si todo falla)
 
 * ROOMBA:
 	* Movimiento:
-		* Montar cajas multiplicadoras
-		* Acoplar motores
-		* Acoplar ruedas
-	* Circuitos de Alimentaci髇 y Regulaci髇
-	* Circuitos para recibir y enviar se馻les (I2C, Serial, US, SD)
+		* ~~Montar cajas multiplicadoras~~
+		* ~~Acoplar motores~~
+		* ~~Acoplar ruedas~~
+		* ~~Comprar Motores DC~~
+		* ~~Dejarnos de maricadas con las cajas~~
+	* ~~Circuitos de Alimentaci贸n y Regulaci贸n~~
+	* ~~Circuitos para recibir y enviar se帽ales (I2C, Serial, US, SD)~~
 
-* Documentaci髇:
-	* Documentaci髇 Integradores (醤gulo, velocidad, posici髇)
-	* Documentaci髇 PWM
-	* Documentaci髇 Ultra-Sonido
-	* Documentaci髇 I2C
-	* Documentaci髇 Driver I2C
-	* Documentaci髇 M骴ulo de Posici髇 (Integrado)
-	* Documentaci髇 LCD
-	* Documentaci髇 Timer/Counter
-	* Documentaci髇 SD
-	* Documentaci髇 Multiplicador
-	* Documentaci髇 Divisor
+* Documentaci贸n:
+	* Documentaci贸n Integradores (谩ngulo, velocidad, posici贸n)
+	* Documentaci贸n PWM
+	* Documentaci贸n Ultra-Sonido
+	* Documentaci贸n I2C
+	* Documentaci贸n Driver I2C
+	* Documentaci贸n M贸dulo de Posici贸n (Integrado)
+	* Documentaci贸n LCD
+	* Documentaci贸n Timer/Counter
+	* Documentaci贸n SD
+	* Documentaci贸n Multiplicador
+	* Documentaci贸n Divisor
 
-* Sustentaci髇:
-	* Completa: Presentaci髇 de todo el proyecto
-	* Grupal: Presentaci髇 de m骴ulos realizados
+* Sustentaci贸n:
+	* Completa: Presentaci贸n de todo el proyecto
+	* Grupal: Presentaci贸n de m贸dulos realizados
 	* Individual: Entender los sistemas desarrollados en grupo para sobrevivir el juicio inquisidor de Ferny.
-* M鷖ica:
+* M煤sica:
 	* Juan debe aprender 6AM de Farruko en guitarra, el resto ayudamos con la letra.

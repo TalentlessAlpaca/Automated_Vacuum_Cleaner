@@ -27,6 +27,7 @@ module spi_master_testbench;
 	// Inputs
 	reg clk;
 	reg rst;
+	reg sssd_in;
 	reg start;
 	reg miso;
 	reg [7:0] data_in;
@@ -35,25 +36,28 @@ module spi_master_testbench;
 	wire mosi;
 	wire sck;
 	wire ss;
+	wire sssd_out;
 	wire [7:0] data_out;
 	wire busy;
 	wire new_data;
 	
-	//parameters clk
+	//parameters
 	parameter PERIOD          = 10;
-   	parameter real DUTY_CYCLE = 0.5;
-   	parameter OFFSET          = 0;
+   parameter real DUTY_CYCLE = 0.5;
+   parameter OFFSET          = 0;
 
 	// Instantiate the Unit Under Test (UUT)
 	spi_master uut (
 		.clk(clk), 
 		.rst(rst), 
+		.sssd_in(sssd_in),
 		.start(start), 
 		.miso(miso), 
 		.data_in(data_in), 
 		.mosi(mosi), 
 		.sck(sck), 
 		.ss(ss), 
+		.ss(sssd_out),
 		.data_out(data_out), 
 		.busy(busy), 
 		.new_data(new_data)
@@ -63,13 +67,13 @@ module spi_master_testbench;
 		// Initialize Inputs
 		clk = 0;
 		rst = 1;
+		sssd_in = 1;
 		start = 0;
 		miso = 0;
 		data_in = 0;
 			
 	#OFFSET
-	//clk
-        forever
+     forever
 			begin
 				clk = 1'b1;
 				#(PERIOD-(PERIOD*DUTY_CYCLE)) clk = 1'b0;
@@ -79,7 +83,6 @@ module spi_master_testbench;
 	
 	initial begin
 	#OFFSET
-	//se simula entrada miso como un reloj de mayor tamaño 
 		forever
 			begin
 				miso = 1'b1;
@@ -94,11 +97,12 @@ module spi_master_testbench;
 		#10;
 			rst=0;
 			start=1;
-			data_in=01011100; //dMOSI
+			sssd_in=0;
+			data_in=01011100;
 		#10
 			start=0;
 		@(*)begin
-			if (new_data) begin //avail
+			if (new_data)begin
 				#20
 					rst=1;
 				#10
@@ -108,4 +112,5 @@ module spi_master_testbench;
 	end
       
 endmodule
+
 
