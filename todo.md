@@ -39,8 +39,8 @@
 		* ~~Montar cajas multiplicadoras~~
 		* ~~Acoplar motores~~
 		* ~~Acoplar ruedas~~
-		* Comprar Motores DC
-		* Dejarnos de maricadas con las cajas
+		* ~~Comprar Motores DC~~
+		* ~~Dejarnos de maricadas con las cajas~~
 	* ~~Circuitos de Alimentación y Regulación~~
 	* ~~Circuitos para recibir y enviar señales (I2C, Serial, US, SD)~~
 
