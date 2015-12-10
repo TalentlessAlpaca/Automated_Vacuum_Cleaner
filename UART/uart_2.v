@@ -1,7 +1,7 @@
 / Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module uart#(parameter tam_data = 11, parameter read_bit = 4)(
+module uart_2#(parameter tam_data = 11, parameter read_bit = 4)(
 	//* tam_data es el dataño de datos que se van a transmitir y recibir
 	//* para este caso 11 datos que correponden a 1 bit START, 8 bits DATOS, 2 bits STOP
 	//* read_bit se establece de acuerdo a la velocidad  de tramision de datos respecto
