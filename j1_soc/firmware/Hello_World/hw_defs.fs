@@ -110,8 +110,15 @@ h# 6400 constant Done
 h# 6401 constant Value
 
 \ direccion
+
 h# 6500 constant MotorUno
 h# 6502 constant MotorDos
+
+\ Segunda UART
+h# 6600 constant EscribeValor
+h# 6602 constant OcupadoEscribiendo
+h# 6604 constant LeeValor
+h# 6606 constant OcupadoLeyendo
 
 \ constantes 
 
